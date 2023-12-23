@@ -90,6 +90,27 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.post("/deleteUser", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    // Find the user by emailID and delete
+    const deletedUser = await Users.findOneAndDelete({ email });
+
+    if (!deletedUser) {
+      return res.status(404).send({ message: "User not found.", status: 404 });
+    }
+
+    res.status(200).send({
+      message: "User deleted successfully.",
+      status: 200,
+    });
+  } catch (error) {
+    console.error("Error during user deletion:", error.message);
+    res.status(500).send({ message: "Internal server error.", status: 500 });
+  }
+});
+
 app.post("/checkId", async (req, res) => {
   try {
     const { portfolioId, email } = req.body;
@@ -135,6 +156,7 @@ app.post("/portfoliodata", async (req, res) => {
       tools,
       projects,
       links,
+      portfolioId,
     } = req.body;
 
     // Create the new portfolio instance
@@ -152,6 +174,7 @@ app.post("/portfoliodata", async (req, res) => {
         linkedin: links.linkedin,
         instagram: links.instagram,
       },
+      portfolioId,
     });
 
     // Save the new portfolio to the database

@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Paper from "@mui/material/Paper";
 import Draggable from "react-draggable";
-import Intropage from "../pages/Intropage";
+import { Link } from "react-router-dom";
 
 function PaperComponent(props) {
   return (
@@ -20,54 +20,93 @@ function PaperComponent(props) {
   );
 }
 
-export default function DialogComp({ user, setUser }) {
+export default function DialogComp({
+  values,
+  setValues,
+  setUser,
+  setDecline,
+  decline,
+}) {
   const [open, setOpen] = React.useState(true);
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleClose = async () => {
+    try {
+      await fetch("http://localhost:5000/deleteUser", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ email: values["email"] }),
+      })
+        .then((result) => {
+          return result.json();
+        })
+        .then((data) => {
+          if (data.status === 200) {
+            setOpen(false);
+            setValues({
+              name: "",
+              email: "",
+              password: "",
+              confirmPassword: "",
+            });
+            setUser({
+              email: "",
+              name: "",
+              portfolioId: "",
+            });
+          }
+
+          setDecline(false);
+        });
+    } catch (err) {
+      setUser({
+        email: "",
+        name: "",
+        portfolioId: "",
+      });
+      console.log(err);
+      setDecline(!decline);
+    }
   };
 
   return (
-    <>
-      {open ? (
-        <React.Fragment>
-          <Dialog
-            open={open}
-            onClose={handleClose}
-            PaperComponent={PaperComponent}
-            aria-labelledby="draggable-dialog-title"
-          >
-            <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
-              Alert
-            </DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                Do you want to change the /{user["portfolioId"]} to other?
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button
-                autoFocus
-                onClick={(e) => {
-                  handleClose();
-                }}
-              >
-                No
-              </Button>
-              <Button
-                onClick={(e) => {
-                  handleClose();
-                  setUser({ ...user, portfolioId: "" });
-                }}
-              >
-                yes
-              </Button>
-            </DialogActions>
-          </Dialog>
-        </React.Fragment>
-      ) : (
-        <Intropage setUser={setUser} user={user} />
-      )}
-    </>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      PaperComponent={PaperComponent}
+      aria-labelledby="draggable-dialog-title"
+    >
+      <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
+        About Terms and Conditions
+      </DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          This action will delete the account you created before!!
+          <br />
+          If you want to continue with the creation of portfolio accept the
+          terms and conditions else click on Decline :
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button
+          autoFocus
+          onClick={(e) => {
+            handleClose();
+          }}
+        >
+          <Link to="/">Decline</Link>
+        </Button>
+        <Button
+          onClick={(e) => {
+            handleClose();
+            // setUser({ ...user, portfolioId: "" });
+          }}
+        >
+          Accept
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 }

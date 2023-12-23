@@ -11,6 +11,7 @@ import IdMaker from "../components/IdMaker";
 
 import { Alert, Card, IconButton, Snackbar } from "@mui/material";
 import { ContentCopy } from "@mui/icons-material";
+import DialogComp from "../components/DialogComp";
 
 const steps = [
   {
@@ -46,13 +47,15 @@ export default function Intropage({ setUser, user, values, setValues }) {
     }
   };
 
+  const [decline, setDecline] = useState(false);
   const handleBack = (index) => {
     setError("");
     setName("");
     setCopied(false);
     if (index === 0) {
       //setUser to null and logout
-      setUser("");
+      // setUser("");
+      setDecline(true);
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
     }
@@ -106,6 +109,15 @@ export default function Intropage({ setUser, user, values, setValues }) {
 
   return (
     <div>
+      {decline && (
+        <DialogComp
+          setDecline={setDecline}
+          decline={decline}
+          values={values}
+          setValues={setValues}
+          setUser={setUser}
+        />
+      )}
       {page === true ? (
         <div
           style={{

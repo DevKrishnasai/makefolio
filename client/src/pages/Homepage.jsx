@@ -59,6 +59,7 @@ const Homepage = ({ user, setUser }) => {
       linkedin: "",
       instagram: "",
     },
+    portfolioId: user["portfolioId"],
   });
 
   //styles

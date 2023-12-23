@@ -1,11 +1,6 @@
 import mongoose from "mongoose";
 
 const portfolioSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    require: true,
-    unique: true,
-  },
   logoName: {
     type: String,
     require: true,
@@ -17,7 +12,6 @@ const portfolioSchema = new mongoose.Schema({
   email: {
     type: String,
     require: true,
-    unique: true,
   },
   about: {
     type: String,
@@ -46,6 +40,11 @@ const portfolioSchema = new mongoose.Schema({
     instagram: {
       type: String,
     },
+  },
+  portfolioId: {
+    type: String,
+    unique: true,
+    require: true,
   },
 });
 
