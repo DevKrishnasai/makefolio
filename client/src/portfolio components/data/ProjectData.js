@@ -6,21 +6,21 @@ export const name = "Krishna Sai";
 //Tag lines
 export const sequence = [
   "A Mern Stack Developer.",
-  1000,
+  // 1000,
   "A Flutter Developer.",
-  1000,
+  // 1000,
   "A problem solver.",
-  1000,
+  // 1000,
   "A....",
-  1000,
+  // 1000,
   "A.... cool guy?",
-  1000,
+  // 1000,
   "Ok...",
   "Ok...  I'm running out of ideas...",
   "Uhh...",
-  1000,
+  // 1000,
   "Uhh... you can scroll down to see my projects now...",
-  1000,
+  // 1000,
 ];
 
 // -------- About Section

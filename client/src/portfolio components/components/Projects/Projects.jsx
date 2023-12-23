@@ -1,7 +1,7 @@
 import React from "react";
 import ProjectCard from "./ProjectCard/ProjectCard";
 import ScrollAnimation from "react-animate-on-scroll";
-function Projects() {
+function Projects({ data }) {
   const style = {
     height: "10px",
     border: "0",
@@ -17,8 +17,7 @@ function Projects() {
               <hr style={style} />
             </div>
           </ScrollAnimation>
-
-          <ProjectCard />
+          <ProjectCard data={data} />
         </div>
       </div>
     </>

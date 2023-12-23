@@ -4,7 +4,7 @@ import { Technologies, Tech, ContactWrapper, TechImg } from "./AboutElements";
 import { TechCard } from "../Projects/ProjectCard/ProjectCardElements";
 import ScrollAnimation from "react-animate-on-scroll";
 
-function About() {
+function About({ data }) {
   const style = {
     height: "10px",
     border: "0",
@@ -13,34 +13,41 @@ function About() {
   return (
     <ContactWrapper id="about">
       <div className="Container">
-        <ScrollAnimation delay={300} animateIn="fadeIn" animateOnce>
+        <ScrollAnimation delay={200} animateIn="fadeIn" animateOnce>
           <div className="SectionTitle">
             About Me
             <hr style={style} />
           </div>
         </ScrollAnimation>
         <div className="BigCard">
-          <div className="AboutBio">
+          <div
+            className="AboutBio"
+            style={{ textAlign: "left", width: "100%" }}
+          >
             <ScrollAnimation animateIn="fadeInLeft" animateOnce>
-              <div dangerouslySetInnerHTML={{ __html: about }} />
+              <div dangerouslySetInnerHTML={{ __html: data["about"] }} />
             </ScrollAnimation>
             <br />
             <ScrollAnimation animateIn="bounceInRight" animateOnce>
-              <h3 style={{ fontWeight: "700" }}>
+              <h3
+                style={{
+                  fontWeight: "700",
+                }}
+              >
                 Technologies I'm Familiar With ➜
               </h3>
             </ScrollAnimation>
             <br />
             <Technologies>
-              {stackList.map((stack, index) => (
+              {data["techs"].map((stack, index) => (
                 <ScrollAnimation
                   animateIn="bounceInLeft"
                   animateOnce
-                  key={index}
+                  key={stack.key}
                 >
                   <Tech className="tech">
                     {/* <TechImg src={stack.img} alt={stack.name} /> */}
-                    <TechCard>{stack.name}</TechCard>
+                    <TechCard>{stack.value}</TechCard>
                   </Tech>
                 </ScrollAnimation>
               ))}
@@ -51,15 +58,15 @@ function About() {
             </ScrollAnimation>
             <br />
             <Technologies>
-              {tools.map((stack, index) => (
+              {data["tools"].map((tool, index) => (
                 <ScrollAnimation
                   animateIn="bounceInLeft"
                   animateOnce
-                  key={index}
+                  key={tool.key}
                 >
                   <Tech key={index} className="tech">
                     {/* <TechImg src={stack.img} alt={stack.name} /> */}
-                    <TechCard>{stack.name}</TechCard>
+                    <TechCard>{tool.value}</TechCard>
                   </Tech>
                 </ScrollAnimation>
               ))}

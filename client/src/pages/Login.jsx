@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import FormInput from "../components/Field";
 import {
   Box,
   Button,
@@ -47,7 +46,6 @@ const Login = ({ setUser, toggle, setToggle, user }) => {
         .then((data) => {
           if (data.status === 200) {
             setUser({ ...values, portfolioId: data["portfolioId"] });
-            console.log(user);
             setIsLoading(false);
           } else {
             setServerError(data.message);

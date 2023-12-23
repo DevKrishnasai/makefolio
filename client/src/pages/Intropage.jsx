@@ -29,7 +29,14 @@ const steps = [
   },
 ];
 
-export default function Intropage({ setUser, user, values, setValues }) {
+export default function Intropage({
+  setUser,
+  user,
+  values,
+  setValues,
+  toggle,
+  setToggle,
+}) {
   const [activeStep, setActiveStep] = useState(0);
   const [id, setId] = useState(false);
   const [name, setName] = useState("");
@@ -116,6 +123,8 @@ export default function Intropage({ setUser, user, values, setValues }) {
           values={values}
           setValues={setValues}
           setUser={setUser}
+          toggle={toggle}
+          setToggle={setToggle}
         />
       )}
       {page === true ? (

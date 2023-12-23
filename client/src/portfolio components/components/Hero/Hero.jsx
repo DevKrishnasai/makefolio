@@ -12,9 +12,9 @@ import {
 } from "./HeroElements";
 import { TypeAnimation } from "react-type-animation";
 import ScrollAnimation from "react-animate-on-scroll";
-import { sequence, name } from "../../data/ProjectData";
+// import { sequence, name } from "../../data/ProjectData";
 
-function Hero() {
+function Hero({ data }) {
   const [isOpen, setIsOpen] = useState(false);
   const [showSubtitle, setShowSubtitle] = useState(false);
   const [showSubtitle1, setShowSubtitle1] = useState(false);
@@ -23,10 +23,13 @@ function Hero() {
   const toggle = () => {
     setIsOpen(!isOpen);
   };
+
+  const sequence = data["tags"].map((tag) => tag["value"]);
+
   return (
     <main>
       <Dropdown isOpen={isOpen} toggle={toggle} />
-      <Header toggle={toggle} />
+      <Header toggle={toggle} logo={data["logoName"]} />
       <HeroContainer>
         <HeroWrapper>
           <HeroLeft>
@@ -41,7 +44,7 @@ function Hero() {
               {showSubtitle1 && (
                 <TypeAnimation
                   cursor={false}
-                  sequence={[name, () => setShowSubtitle(true)]}
+                  sequence={[data["fullName"], () => setShowSubtitle(true)]}
                   speed={{ type: "keyStrokeDelayInMs", value: 150 }}
                   wrapper="h1"
                   repeat={0}
@@ -58,7 +61,7 @@ function Hero() {
                     "See ya! :)",
                     2000,
                   ]}
-                  speed={50}
+                  speed={10}
                   deletionSpeed={65}
                   wrapper="h5"
                   repeat={Infinity}
@@ -92,7 +95,7 @@ function Hero() {
           </HeroLeft>
           <HeroRight>
             <ScrollAnimation animateIn="bounceIn">
-              <Image src="../../public/photo.png" alt="man-svgrepo" />
+              <Image src={data["hero_url"]} alt="man-svgrepo" />
             </ScrollAnimation>
           </HeroRight>
         </HeroWrapper>

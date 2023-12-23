@@ -7,7 +7,6 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Paper from "@mui/material/Paper";
 import Draggable from "react-draggable";
-import { Link } from "react-router-dom";
 
 function PaperComponent(props) {
   return (
@@ -26,6 +25,8 @@ export default function DialogComp({
   setUser,
   setDecline,
   decline,
+  toggle,
+  setToggle,
 }) {
   const [open, setOpen] = React.useState(true);
 
@@ -43,21 +44,19 @@ export default function DialogComp({
           return result.json();
         })
         .then((data) => {
-          if (data.status === 200) {
-            setOpen(false);
-            setValues({
-              name: "",
-              email: "",
-              password: "",
-              confirmPassword: "",
-            });
-            setUser({
-              email: "",
-              name: "",
-              portfolioId: "",
-            });
-          }
-
+          setOpen(false);
+          setValues({
+            name: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+          });
+          setUser({
+            email: "",
+            name: "",
+            portfolioId: "",
+          });
+          setToggle(!toggle);
           setDecline(false);
         });
     } catch (err) {
@@ -86,7 +85,7 @@ export default function DialogComp({
           This action will delete the account you created before!!
           <br />
           If you want to continue with the creation of portfolio accept the
-          terms and conditions else click on Decline :
+          terms and conditions else click on Decline :(
         </DialogContentText>
       </DialogContent>
       <DialogActions>
@@ -96,11 +95,11 @@ export default function DialogComp({
             handleClose();
           }}
         >
-          <Link to="/">Decline</Link>
+          Decline
         </Button>
         <Button
           onClick={(e) => {
-            handleClose();
+            setOpen(false);
             // setUser({ ...user, portfolioId: "" });
           }}
         >

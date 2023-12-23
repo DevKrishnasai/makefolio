@@ -46,6 +46,7 @@ const portfolioSchema = new mongoose.Schema({
     unique: true,
     require: true,
   },
+  hero_url: String,
 });
 
 export default mongoose.model("Portfolios", portfolioSchema);

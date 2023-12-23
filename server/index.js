@@ -157,6 +157,7 @@ app.post("/portfoliodata", async (req, res) => {
       projects,
       links,
       portfolioId,
+      hero_url,
     } = req.body;
 
     // Create the new portfolio instance
@@ -175,6 +176,7 @@ app.post("/portfoliodata", async (req, res) => {
         instagram: links.instagram,
       },
       portfolioId,
+      hero_url,
     });
 
     // Save the new portfolio to the database
@@ -185,6 +187,25 @@ app.post("/portfoliodata", async (req, res) => {
       .send({ message: "Portfolio data saved successfully.", status: 201 });
   } catch (error) {
     console.error("Error during saving:", error.message);
+    res.status(500).send({ message: "Internal server error.", status: 500 });
+  }
+});
+
+app.get("/portfolio/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    const portfolioData = await Portfolios.findOne({ portfolioId: id });
+    if (!portfolioData) {
+      return res
+        .status(404)
+        .send({ message: "Portfolio not found.", status: 404 });
+    }
+    res
+      .status(200)
+      .send({ message: "found portfolio", portfolioData, status: 200 });
+  } catch (error) {
+    console.error("Error during fetching:", error.message);
     res.status(500).send({ message: "Internal server error.", status: 500 });
   }
 });

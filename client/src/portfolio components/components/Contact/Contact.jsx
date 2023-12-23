@@ -8,7 +8,7 @@ import { TechCard } from "../Projects/ProjectCard/ProjectCardElements";
 import { email, links } from "../../data/ProjectData";
 
 import ScrollAnimation from "react-animate-on-scroll";
-function Contact() {
+function Contact({ data }) {
   const [showTooltip, setShowTooltip] = useState(false);
   const copyToClipboard = () => {
     navigator.clipboard.writeText(email);
@@ -49,7 +49,7 @@ function Contact() {
               }}
             >
               <TechCard style={{ display: "contents" }}>
-                <span>{email}</span>
+                <span>{data["email"]}</span>
               </TechCard>
               <Go className="go">
                 <Tooltip
@@ -88,7 +88,7 @@ function Contact() {
               }}
             >
               <a
-                href={links["github"]}
+                href={data["links"]["github"]}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -102,7 +102,7 @@ function Contact() {
               </a>
 
               <a
-                href={links["linkedin"]}
+                href={data["links"]["linkedin"]}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -116,7 +116,7 @@ function Contact() {
               </a>
 
               <a
-                href={links["instagram"]}
+                href={data["links"]["instagram"]}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

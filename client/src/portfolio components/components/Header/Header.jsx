@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav, Logo, NavLink, Bars, NavMenu, NavBtn } from "./HeaderElements";
 
-const Header = ({ toggle }) => {
+const Header = ({ toggle, logo }) => {
   return (
     <div className="Container" style={{ padding: 0 }}>
       <Nav>
@@ -11,7 +11,7 @@ const Header = ({ toggle }) => {
             alt="logo"
           /> */}
           <h3 style={{ color: "white", fontSize: "28px", fontWeight: "600" }}>
-            Krishna
+            {logo}
           </h3>
         </Logo>
         <NavMenu>

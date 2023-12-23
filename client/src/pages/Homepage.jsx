@@ -7,6 +7,7 @@ import {
   Snackbar,
   Stack,
   TextField,
+  Typography,
 } from "@mui/material";
 
 import React, { useState } from "react";
@@ -21,9 +22,13 @@ import {
   LinkedIn,
   Instagram,
   ConstructionRounded,
+  CloudUploadOutlined,
 } from "@mui/icons-material";
 import RemainingDetailsPage from "./RemainingDetailsPage";
 import { Textarea } from "@mui/joy";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { storage } from "../firebase files/firebase";
+import styled from "styled-components";
 
 const Homepage = ({ user, setUser }) => {
   //useState hooks to handle state changes
@@ -60,6 +65,7 @@ const Homepage = ({ user, setUser }) => {
       instagram: "",
     },
     portfolioId: user["portfolioId"],
+    hero_url: "",
   });
 
   //styles
@@ -159,11 +165,43 @@ const Homepage = ({ user, setUser }) => {
       setError("linkedin");
     } else if (data["links"]["instagram"] === "") {
       setError("instagram");
+    } else if (data["hero_url"] === "") {
+      setError("hero_url");
     } else {
       setError("");
       setPage("middle");
       console.log(data);
     }
+  };
+
+  const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: 1,
+  });
+  const [loading, setLoading] = useState(false);
+
+  const uploadImage = (file) => {
+    setError(false);
+    setLoading(true);
+    console.log("in uploadImage");
+    if (file == null) return;
+    console.log("i'm uploading image");
+    const imageRef = ref(storage, `${data["fullName"]}/${file.name}`);
+    uploadBytes(imageRef, file).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        console.log("Download URL:", url);
+
+        setData({ ...data, hero_url: url });
+        setLoading(false);
+      });
+    });
   };
 
   //main code
@@ -434,6 +472,49 @@ const Homepage = ({ user, setUser }) => {
               error === "instagram" && "Please paste the instagram link"
             }
           />
+          {loading && (
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <div class="wrapper">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="shadow"></div>
+                <div class="shadow"></div>
+                <div class="shadow"></div>
+              </div>
+            </div>
+          )}
+          {data["hero_url"] !== "" && (
+            <img
+              src={data["hero_url"]}
+              alt="nope"
+              style={{ width: "100%", marginTop: "10px" }}
+            />
+          )}
+          {error === "hero_url" && (
+            <Typography
+              sx={{ textAlign: "center" }}
+              variant="body1"
+              color="red"
+            >
+              Please Upload your photo
+            </Typography>
+          )}
+          <Button
+            component="label"
+            variant="contained"
+            startIcon={<CloudUploadOutlined />}
+            // sx={{ ...textFieldSX, width: "100%" }}
+            onClick={(e) => setError("")}
+            onChange={(e) => {
+              setError("");
+              setData({ ...data, hero_url: "" });
+              uploadImage(e.target.files[0]);
+            }}
+          >
+            Upload file
+            <VisuallyHiddenInput type="file" />
+          </Button>
           <Button variant="contained" onClick={() => checkForm()} type="submit">
             Next Page
           </Button>

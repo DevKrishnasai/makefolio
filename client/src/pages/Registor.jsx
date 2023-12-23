@@ -88,6 +88,8 @@ const Register = ({ setUser, toggle, setToggle, user }) => {
           user={user}
           values={values}
           setValues={setValues}
+          toggle={toggle}
+          setToggle={setToggle}
         />
       ) : (
         <Box

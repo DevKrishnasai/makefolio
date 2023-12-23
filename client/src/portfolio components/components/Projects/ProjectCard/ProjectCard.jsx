@@ -10,10 +10,10 @@ import {
   BtnGroup,
 } from "./ProjectCardElements";
 import ScrollAnimation from "react-animate-on-scroll";
-function ProjectCard() {
+function ProjectCard({ data }) {
   return (
     <>
-      {ProjectList.map((list, index) =>
+      {data["projects"].map((list, index) =>
         index % 2 ? (
           <ScrollAnimation
             animatePreScroll
@@ -23,21 +23,21 @@ function ProjectCard() {
           >
             <Card>
               <CardLeft>
-                <img src={list.img} alt={list.name} />
+                <img src={list["image_url"]} alt={list["title"]} />
               </CardLeft>
               <CardRight>
-                <h4>{list.title}</h4>
-                <p>{list.description}</p>
+                <h4>{list["title"]}</h4>
+                <p>{list["description"]}</p>
                 <TechCardContainer>
-                  {list.tech_stack.map((tech, index) => (
-                    <TechCard key={index}>{tech}</TechCard>
+                  {list["tech_stack"].map((tech, index) => (
+                    <TechCard key={index}>{tech["value"]}</TechCard>
                   ))}
                 </TechCardContainer>
                 <BtnGroup>
-                  {list.github_url.length > 0 && (
+                  {list["github_repo_link"].length > 0 && (
                     <a
                       className="btn SecondaryBtn btn-shadow"
-                      href={list.github_url}
+                      href={list["github_repo_link"]}
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
@@ -49,10 +49,10 @@ function ProjectCard() {
                       <span>Github</span>
                     </a>
                   )}
-                  {list.demo_url.length > 0 && (
+                  {list["github_live_link"].length > 0 && (
                     <a
                       className="btn PrimaryBtn btn-shadow"
-                      href={list.demo_url}
+                      href={list["github_live_link"]}
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{ marginRight: "10px" }}
@@ -73,21 +73,21 @@ function ProjectCard() {
           >
             <Card>
               <CardLeft>
-                <img src={list.img} alt={list.name} />
+                <img src={list["image_url"]} alt={list["title"]} />
               </CardLeft>
               <CardRight>
-                <h4>{list.title}</h4>
-                <p>{list.description}</p>
+                <h4>{list["title"]}</h4>
+                <p>{list["description"]}</p>
                 <TechCardContainer>
-                  {list.tech_stack.map((tech, index) => (
-                    <TechCard key={index}>{tech}</TechCard>
+                  {list["tech_stack"].map((tech, index) => (
+                    <TechCard key={index}>{tech["value"]}</TechCard>
                   ))}
                 </TechCardContainer>
                 <BtnGroup>
-                  {list.github_url.length > 0 && (
+                  {list["github_repo_link"].length > 0 && (
                     <a
                       className="btn SecondaryBtn btn-shadow"
-                      href={list.github_url}
+                      href={list["github_repo_link"]}
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
@@ -99,10 +99,10 @@ function ProjectCard() {
                       <span>Github</span>
                     </a>
                   )}
-                  {list.demo_url.length > 0 && (
+                  {list["github_live_link"].length > 0 && (
                     <a
                       className="btn PrimaryBtn btn-shadow"
-                      href={list.demo_url}
+                      href={list["github_live_link"]}
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{ marginRight: "10px" }}
