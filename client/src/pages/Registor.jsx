@@ -96,7 +96,7 @@ const Register = ({ setUser, toggle, setToggle, user }) => {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          height="80vh"
+          height="100vh"
         >
           {isLoading ? (
             <Btn loading variant="plain" sx={{ height: "50px" }}>
@@ -105,7 +105,9 @@ const Register = ({ setUser, toggle, setToggle, user }) => {
           ) : (
             <Stack>
               <form onSubmit={handleSubmit} className="form">
-                <h1>Register</h1>
+                <div class="twelve">
+                  <h1>Register</h1>
+                </div>
                 <TextField
                   type="text"
                   label="Enter name"
@@ -210,10 +212,17 @@ const Register = ({ setUser, toggle, setToggle, user }) => {
                   Already have a account?
                   <Button
                     variant="text"
-                    sx={{ textTransform: "none" }}
+                    sx={{
+                      textTransform: "none",
+                      ":hover": {
+                        textDecoration: "underline",
+                        cursor: "pointer",
+                        color: "blue",
+                      },
+                    }}
                     onClick={(e) => setToggle(!toggle)}
                   >
-                    SignIn
+                    signin
                   </Button>
                 </Typography>
               </form>

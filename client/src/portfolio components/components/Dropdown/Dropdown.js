@@ -56,37 +56,25 @@ export const NavBtn = styled.div`
   font-size: 1.7rem;
 `;
 
-function Dropdown({ isOpen, toggle }) {
+function Dropdown({ isOpen, toggle, data }) {
   return (
     <SiderBar isOpen={isOpen} onClick={toggle}>
       <CloseIcon onClick={toggle} />
       <NavMenu>
-        <NavLink
-          onClick={toggle}
-          className="menu-item"
-          to="projects"
-        >
+        <NavLink onClick={toggle} className="menu-item" to="projects">
           Projects
         </NavLink>
-        <NavLink
-          onClick={toggle}
-          className="menu-item"
-          to="about"
-        >
+        <NavLink onClick={toggle} className="menu-item" to="about">
           About
         </NavLink>
-        <NavLink
-          onClick={toggle}
-          className="menu-item"
-          to="contact"
-        >
+        <NavLink onClick={toggle} className="menu-item" to="contact">
           Contact
         </NavLink>
       </NavMenu>
       <NavBtn onClick={toggle}>
         <a
           className="btn PrimaryBtn"
-          href="https://www.linkedin.com/in/krishnasaiambati/"
+          href={data["links"]["linkedin"]}
           target="_blank"
           rel="noopener noreferrer"
         >

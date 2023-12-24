@@ -5,13 +5,12 @@ import { IconButton, Tooltip } from "@mui/material";
 import Zoom from "@mui/material/Zoom";
 import { FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
 import { TechCard } from "../Projects/ProjectCard/ProjectCardElements";
-import { email, links } from "../../data/ProjectData";
 
 import ScrollAnimation from "react-animate-on-scroll";
 function Contact({ data }) {
   const [showTooltip, setShowTooltip] = useState(false);
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(email);
+    navigator.clipboard.writeText(data["email"]);
     setShowTooltip(true);
     setTimeout(() => {
       setShowTooltip(false);
@@ -126,7 +125,7 @@ function Contact({ data }) {
                   color: "rgb(228, 64, 95)",
                 }}
               >
-                <FaInstagram className="icon" />
+                <FaInstagram className="icon" style={{ color: "red" }} />
               </a>
             </div>
           </div>

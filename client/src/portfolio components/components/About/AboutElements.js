@@ -14,6 +14,7 @@ export const Technologies = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
   margin-right: auto;
   margin-left: auto;
   margin-bottom: -2rem;
@@ -25,7 +26,7 @@ export const Tech = styled.div`
   align-items: center;
   // max-width: 100px;
   // min-width: 100px;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 `;
 
 export const TechImg = styled.img`

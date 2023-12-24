@@ -1,72 +1,65 @@
 import styled, { keyframes } from "styled-components";
 import { Link as LinkScroll } from "react-scroll";
 
-export const HeroContainer = styled.div`
-  padding: 4rem 0 2rem; /* Top padding increased, bottom padding decreased */
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  // max-width: 1870px; /* Set a maximum width for larger screens */
-
-  @media (min-width: 576px) {
-    max-width: 540px;
-  }
-  @media (min-width: 768px) {
-    max-width: 1300px;
-  }
-`;
-
 export const HeroWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 90%;
+  height: calc(100vh - 150px);
+  margin: 0 auto;
 
   @media screen and (max-width: 900px) {
+    width: 100%;
+    height: 100%;
     flex-direction: column;
-    text-align: center;
   }
 `;
 
 export const HeroLeft = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
-  // text-align: center;
+  align-items: center;
+  padding-right: 1rem;
+  width: 100%;
 
-  flex: 1;
-  margin-left: auto;
-  width: 50%; /* Adjust the width for responsiveness */
   h1 {
-    font-size: 2.8rem;
+    font-size: 2.3rem;
     color: #f6f6f6;
-    opacity: 0.98;
-    font-weight: 400;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+  h2 {
+    font-size: 2.1rem;
+    color: #f6f6f6;
+    font-weight: 500;
+    margin-bottom: 1.4rem;
   }
 
   h5 {
-    font-size: 1.4rem;
-    color: white;
-    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    color: #fff;
   }
+
   @media screen and (max-width: 900px) {
+    flex: 1;
     width: 100%;
-    align-items: center;
     text-align: center;
-    h1 {
-      font-size: 2rem;
+    padding-right: 0;
+    h1,
+    h2 {
+      font-size: 1.5rem;
       color: #f6f6f6;
-      opacity: 0.98;
-      font-weight: 400;
+      font-weight: 500;
     }
 
     h5 {
-      font-size: 1.3rem;
-      color: white;
-      margin-bottom: 1rem;
+      margin-top: 20px;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #fff;
     }
   }
 `;
@@ -77,20 +70,23 @@ export const HeroRight = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  width: 50%;
+  padding-left: 3rem;
+
   @media screen and (max-width: 900px) {
-    width: 80%;
-    align-items: center;
-    text-align: center;
-    float: bottom;
-    bottom: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 `;
 
 export const Image = styled.img`
-  max-width: 100%; /* Ensure the image is responsive */
-  height: auto;
+  max-width: 90%;
+  height: 100%;
   border-radius: 40px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  @media screen and (max-width: 900px) {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const ScrollAnimation = keyframes`

@@ -5,7 +5,7 @@ export const Card = styled.div`
   grid-gap: 2rem;
   margin-bottom: 4rem;
   grid-template-columns: 1fr;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.1),
@@ -20,6 +20,7 @@ export const Card = styled.div`
 export const CardLeft = styled.div`
   justify-self: center;
   height: 100%;
+
   img {
     object-fit: cover;
   }
@@ -33,7 +34,7 @@ export const CardRight = styled.div`
 
   h4 {
     font-size: 1.5rem;
-    font-weight: 400;
+    font-weight: 600;
   }
 
   p {
@@ -64,6 +65,7 @@ export const TechCardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 0.6rem;
   @media (min-width: 992px) {
     justify-content: flex-start;
   }

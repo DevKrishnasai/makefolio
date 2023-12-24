@@ -11,7 +11,7 @@ function Projects({ data }) {
     <>
       <div className="ProjectWrapper" id="projects">
         <div className="Container">
-          <ScrollAnimation delay={200} animateIn="fadeIn" animateOnce>
+          <ScrollAnimation animateIn="fadeIn">
             <div className="SectionTitle">
               Projects
               <hr style={style} />

@@ -1,6 +1,5 @@
 import React from "react";
-import { stackList, about, tools } from "../../data/ProjectData";
-import { Technologies, Tech, ContactWrapper, TechImg } from "./AboutElements";
+import { Technologies, Tech, ContactWrapper } from "./AboutElements";
 import { TechCard } from "../Projects/ProjectCard/ProjectCardElements";
 import ScrollAnimation from "react-animate-on-scroll";
 
@@ -13,7 +12,7 @@ function About({ data }) {
   return (
     <ContactWrapper id="about">
       <div className="Container">
-        <ScrollAnimation delay={200} animateIn="fadeIn" animateOnce>
+        <ScrollAnimation animateIn="fadeIn">
           <div className="SectionTitle">
             About Me
             <hr style={style} />
@@ -29,13 +28,13 @@ function About({ data }) {
             </ScrollAnimation>
             <br />
             <ScrollAnimation animateIn="bounceInRight" animateOnce>
-              <h3
+              <h4
                 style={{
                   fontWeight: "700",
                 }}
               >
                 Technologies I'm Familiar With ➜
-              </h3>
+              </h4>
             </ScrollAnimation>
             <br />
             <Technologies>
@@ -54,7 +53,7 @@ function About({ data }) {
             </Technologies>
             <br />
             <ScrollAnimation animateIn="bounceInRight" animateOnce>
-              <h3 style={{ fontWeight: "700" }}>Tools I'm Familiar With ➜</h3>
+              <h4 style={{ fontWeight: "700" }}>Tools I'm Familiar With ➜</h4>
             </ScrollAnimation>
             <br />
             <Technologies>

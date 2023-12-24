@@ -1,5 +1,4 @@
 import React from "react";
-import { ProjectList } from "../../../data/ProjectData";
 import { FaGithub } from "react-icons/fa";
 import {
   Card,
@@ -34,7 +33,7 @@ function ProjectCard({ data }) {
                   ))}
                 </TechCardContainer>
                 <BtnGroup>
-                  {list["github_repo_link"].length > 0 && (
+                  {list["github_repo_link"].length > 1 && (
                     <a
                       className="btn SecondaryBtn btn-shadow"
                       href={list["github_repo_link"]}
@@ -49,7 +48,7 @@ function ProjectCard({ data }) {
                       <span>Github</span>
                     </a>
                   )}
-                  {list["github_live_link"].length > 0 && (
+                  {list["github_live_link"].length > 1 && (
                     <a
                       className="btn PrimaryBtn btn-shadow"
                       href={list["github_live_link"]}
@@ -84,7 +83,7 @@ function ProjectCard({ data }) {
                   ))}
                 </TechCardContainer>
                 <BtnGroup>
-                  {list["github_repo_link"].length > 0 && (
+                  {list["github_repo_link"].length > 1 && (
                     <a
                       className="btn SecondaryBtn btn-shadow"
                       href={list["github_repo_link"]}
@@ -99,7 +98,7 @@ function ProjectCard({ data }) {
                       <span>Github</span>
                     </a>
                   )}
-                  {list["github_live_link"].length > 0 && (
+                  {list["github_live_link"].length > 1 && (
                     <a
                       className="btn PrimaryBtn btn-shadow"
                       href={list["github_live_link"]}

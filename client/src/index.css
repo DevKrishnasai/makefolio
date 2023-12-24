@@ -269,3 +269,44 @@ ul {
   left: 50px;
   margin-left: 56px;
 } */
+
+.twelve h1 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  min-width: 130px;
+  text-align: center;
+  margin: auto;
+  white-space: nowrap;
+  padding-bottom: 13px;
+}
+.twelve h1:before {
+  background-color: #001aff;
+  content: "";
+  display: block;
+  height: 3px;
+  width: 70px;
+  margin-bottom: 5px;
+}
+.twelve h1:after {
+  background-color: #001aff;
+  content: "";
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  width: 70px;
+  margin-bottom: 0.25em;
+}
+
+.twelve {
+  position: relative;
+  /* background: #f8f8f8; */
+  /* width: 90%; */
+  /* max-width: 500px; */
+  /* padding: 2em; */
+  /* margin: 1.5em auto; */
+  /* border: 3px solid rgba(0, 0, 0, 0.08); */
+}

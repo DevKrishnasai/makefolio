@@ -69,7 +69,7 @@ const Login = ({ setUser, toggle, setToggle, user }) => {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      height="80vh"
+      height="100vh"
     >
       {isLoading ? (
         <Btn loading variant="plain" sx={{ height: "50px" }}>
@@ -78,7 +78,9 @@ const Login = ({ setUser, toggle, setToggle, user }) => {
       ) : (
         <Stack>
           <form onSubmit={handleSubmit} className="form">
-            <h1>Login</h1>
+            <div class="twelve">
+              <h1>Login</h1>
+            </div>
             <TextField
               type="email"
               label="Enter email"
@@ -141,10 +143,17 @@ const Login = ({ setUser, toggle, setToggle, user }) => {
               Dont't have an account?
               <Button
                 variant="text"
-                sx={{ textTransform: "none" }}
+                sx={{
+                  textTransform: "none",
+                  ":hover": {
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                    color: "blue",
+                  },
+                }}
                 onClick={(e) => setToggle(!toggle)}
               >
-                SignUp
+                signup
               </Button>
             </Typography>
           </form>

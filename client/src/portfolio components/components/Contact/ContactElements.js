@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const ContactWrapper = styled.div`
-  margin: 3rem 0;
+  margin: 3rem 0 0 0;
 `;
 
 export const Email = styled.div`

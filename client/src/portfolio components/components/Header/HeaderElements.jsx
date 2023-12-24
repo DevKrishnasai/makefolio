@@ -19,13 +19,19 @@ export const NavLink = styled(ScrollLink)`
   height: 100%;
   cursor: pointer;
   margin-left: 20px;
+  transition: all 0.3s ease-in-out; /* Changed 'transitions' to 'transition' and set to 'all' for a more comprehensive transition effect */
+
   &:hover {
+    transform: scale(1.05); /* Scale effect on hover */
     padding: 10px;
-    background-color: white;
-    border-radius: 25px;
     color: black;
     font-weight: bold;
-    animation: 14s linear;
+    background-color: white;
+    border-radius: 20px;
+  }
+
+  &:focus {
+    outline: none;
   }
 `;
 export const Logo = styled("div")`
