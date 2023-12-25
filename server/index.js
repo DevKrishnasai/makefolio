@@ -16,7 +16,9 @@ app.use(cors());
 //Db connection
 const connectDB = () => {
   mongoose
-    .connect(process.env.DB)
+    .connect(
+      "mongodb+srv://portfolio:portfolio@portfolio-cluster.wr5e8hj.mongodb.net/"
+    )
     .then(() => console.log("Connect to database"))
     .catch((err) => console.log(err));
 };
@@ -211,8 +213,8 @@ app.get("/portfolio/:id", async (req, res) => {
 });
 
 //server
-app.listen(process.env.PORT, () => {
-  console.log("Server is running on port 5000");
+app.listen(3001, () => {
+  console.log("Server is running on port 3001");
   connectDB();
 });
 
