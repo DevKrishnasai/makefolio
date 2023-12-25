@@ -31,6 +31,10 @@ mongoose.connection.on("disconnected", () => {
   console.log("MongoDB disconnected");
 });
 
+app.get("/", (req, res) => {
+  res.write("API is working");
+});
+
 app.post("/register", async (req, res) => {
   try {
     const { email, password, name } = req.body;
