@@ -42,6 +42,7 @@ export default function Intropage({
   const [name, setName] = useState("");
   const [error, setError] = useState(false);
   const [page, setPage] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const handleNext = (index) => {
     if (index === 2) {
@@ -57,11 +58,8 @@ export default function Intropage({
   const [decline, setDecline] = useState(false);
   const handleBack = (index) => {
     setError("");
-    setName("");
     setCopied(false);
     if (index === 0) {
-      //setUser to null and logout
-      // setUser("");
       setDecline(true);
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -69,7 +67,9 @@ export default function Intropage({
   };
 
   const checkId = async () => {
+    setLoading(true);
     if (name.length < 4) {
+      setLoading(false);
       setError(true);
     } else {
       await fetch("http://localhost:5000/checkId", {
@@ -92,12 +92,14 @@ export default function Intropage({
             setError(true);
             setId(false);
           }
+          setLoading(false);
         })
         .catch((err) => {
           setError(true);
           setId(false);
           console.log(err);
         });
+      setLoading(false);
     }
   };
 
@@ -131,19 +133,38 @@ export default function Intropage({
         <div
           style={{
             maxWidth: "100vw",
-            height: "100vh",
+            height: "90vh",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            margin: "30px !important",
           }}
         >
-          <Box sx={{ maxWidth: 400 }}>
-            <Stepper activeStep={activeStep} orientation="vertical">
+          <Box>
+            <Stepper
+              activeStep={activeStep}
+              orientation="vertical"
+              sx={{
+                maxWidth: 400,
+
+                xs: {
+                  maxWidth: 200,
+                },
+                sm: {
+                  maxWidth: 300,
+                },
+              }}
+            >
               {steps.map((step, index) => (
                 <Step key={step.label}>
                   <StepLabel>{step.label}</StepLabel>
                   <StepContent>
-                    <Typography>{step.description}</Typography>
+                    <Typography
+                      variant="body1"
+                      sx={{ textAlign: "justify", lineHeight: "20px" }}
+                    >
+                      {step.description}
+                    </Typography>
                     {activeStep === 0 && (
                       <Typography
                         variant="body1"
@@ -155,7 +176,7 @@ export default function Intropage({
                           href="https://devkrishnasai.vercel.app/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          style={{ textDecoration: "none" }}
+                          style={{ textDecoration: "none", color: "blue" }}
                         >
                           https://devkrishnasai.vercel.app/
                         </a>
@@ -171,10 +192,12 @@ export default function Intropage({
                         setError={setError}
                         checkId={checkId}
                         user={user}
+                        loading={loading}
+                        setLoading={setLoading}
                       />
                     )}
                     {activeStep === 2 && (
-                      <Box display="flex" alignItems="center">
+                      <Box display="flex" alignItems="center" mt="20px">
                         <Card
                           elevation={copied ? 1 : 5}
                           sx={{
@@ -184,7 +207,7 @@ export default function Intropage({
                           }}
                         >
                           <Typography variant="body1">
-                            https://devkrishnasai.vercel.app/{name}
+                            https://makfolio.vercel.app/{name}
                           </Typography>
                         </Card>
 

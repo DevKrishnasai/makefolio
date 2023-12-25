@@ -9,12 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Box, Card, CardContent } from "@mui/joy";
-import {
-  AddCircleOutlineRounded,
-  Delete,
-  GitHub,
-  LinkedIn,
-} from "@mui/icons-material";
+import { Add, Delete, GitHub, LinkedIn } from "@mui/icons-material";
 import { AspectRatio } from "@mui/joy";
 
 const RemainingDetailsPage = ({
@@ -77,6 +72,9 @@ const RemainingDetailsPage = ({
             setPage("end");
           }
           setLoading(false);
+        })
+        .catch((err) => {
+          alert("Error: " + err.message);
         });
     }
   };
@@ -87,16 +85,29 @@ const RemainingDetailsPage = ({
         error === true
           ? {
               display: "flex",
+              flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              minHeight: "90vh",
+              width: "100%",
+              height: {
+                xs: "90vh",
+                lg: "90vh",
+              },
             }
-          : page === "end" && {
+          : page === "end"
+          ? {
               height: "100vh",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
+            }
+          : {
+              // height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
             }
       }
     >
@@ -141,18 +152,29 @@ const RemainingDetailsPage = ({
         </div>
       ) : (
         page === "middle" && (
-          <Box>
+          <>
             <Box
               sx={{
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
+                width: {
+                  xs: "400px",
+                  lg: "600px",
+                },
+                marginBottom: "40px",
               }}
             >
               {data["projects"].map((project) => {
                 return (
-                  <Card sx={{ marginY: "10px", width: "100%" }} elevation={2}>
+                  <Card
+                    sx={{
+                      marginY: "10px",
+                      width: "100%",
+                    }}
+                    elevation={2}
+                  >
                     <div>
                       <Typography level="title-lg" fontWeight={800}>
                         {project["title"]}
@@ -244,11 +266,13 @@ const RemainingDetailsPage = ({
             <Box
               sx={{
                 position: "fixed",
-                bottom: "20px",
-                left: "50%",
-                transform: "translateX(-50%)",
-                width: "100%",
-                maxWidth: "600px",
+                bottom: "10px",
+                // left: "50%",
+                // transform: "translateX(-50%)",
+                width: {
+                  xs: "60%",
+                  lg: "600px",
+                },
               }}
             >
               <Button
@@ -266,11 +290,21 @@ const RemainingDetailsPage = ({
                 setError(false);
                 handleClickOpen();
               }}
-              sx={{ position: "fixed", bottom: "20px", right: "20px" }}
+              sx={{
+                position: "fixed",
+                bottom: {
+                  xs: "50px",
+                  lg: "40px",
+                },
+                right: {
+                  xs: "20px",
+                  lg: "40px",
+                },
+              }}
             >
-              <AddCircleOutlineRounded />
+              <Add />
             </Fab>
-          </Box>
+          </>
         )
       )}
       {page === "end" && (
@@ -283,7 +317,8 @@ const RemainingDetailsPage = ({
             textAlign: "center",
             padding: "20px",
             borderRadius: "30px",
-            height: "180px",
+            // height: "200px",
+            margin: "20px",
             ":hover": {
               cursor: "pointer",
               boxShadow:
@@ -294,10 +329,14 @@ const RemainingDetailsPage = ({
           elevation={3}
           variant="outlined"
         >
-          <Typography variant="h4" component="h1" sx={{ marginBottom: "5px" }}>
+          <Typography
+            variant="h4"
+            component="h1"
+            sx={{ marginBottom: "5px", fontWeight: 600 }}
+          >
             Thank You for Using Our Service!
           </Typography>
-          <Typography variant="body1" component="p">
+          <Typography variant="body1" component="p" fontWeight={400}>
             If this service helped you out, check out my portfolio and linkedin
             profile for more projects
           </Typography>

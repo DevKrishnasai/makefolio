@@ -4,7 +4,7 @@ import { Nav, Logo, NavLink, Bars, NavMenu } from "./HeaderElements";
 const Header = ({ toggle, logo }) => {
   return (
     <div className="Container" style={{ padding: 0 }}>
-      <Nav>
+      <Nav style={{ zIndex: "88" }}>
         <Logo to="/">
           {/* <img
             src="/logo.png"

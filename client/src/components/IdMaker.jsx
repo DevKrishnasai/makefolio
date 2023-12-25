@@ -1,5 +1,6 @@
 import { TextField, Typography, Button, Box } from "@mui/material";
-import React, { useState } from "react";
+import LoadingButton from "@mui/lab/LoadingButton";
+import React from "react";
 
 const IdMaker = ({
   id,
@@ -10,11 +11,13 @@ const IdMaker = ({
   error,
   setError,
   user,
+  loading,
+  setLoading,
 }) => {
   return (
     <Box
       sx={{
-        height: "150px",
+        height: "140px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-evenly",
@@ -27,6 +30,7 @@ const IdMaker = ({
           setError(false);
         }}
         defaultValue={name}
+        disabled={id && "true"}
       />
       {name.length > 0 && (
         <Typography
@@ -34,7 +38,7 @@ const IdMaker = ({
           sx={{ fontWeight: 500 }}
           color={error ? "red" : "black"}
         >
-          https://devkrishnasai.vercel.app/{name}
+          https://makfolio.vercel.app/{name}
         </Typography>
       )}
       {name.length > 0 && error && (
@@ -45,8 +49,14 @@ const IdMaker = ({
           please enter a name with atleast 3 characters
         </Typography>
       )}
-      <Button variant="contained" onClick={checkId}>
-        Check
+      <Button variant="contained" onClick={checkId} disabled={id && "true"}>
+        {loading ? (
+          <LoadingButton loading variant="outlined">
+            Loading...
+          </LoadingButton>
+        ) : (
+          "check"
+        )}
       </Button>
     </Box>
   );

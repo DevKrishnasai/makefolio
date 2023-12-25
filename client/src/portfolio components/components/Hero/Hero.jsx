@@ -54,7 +54,7 @@ function Hero({ data }) {
                 sequence={[
                   ...sequence,
                   () => setShowScrollDown(true),
-                  "Seriously, my projects are really cool, go check them out!",
+                  "my projects are really cool, go check them out!",
                   1000,
                   "See ya! :)",
                   2000,

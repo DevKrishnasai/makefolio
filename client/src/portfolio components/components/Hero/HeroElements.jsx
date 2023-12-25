@@ -71,8 +71,9 @@ export const HeroRight = styled.div`
   justify-content: center;
   align-items: flex-end;
   padding-left: 3rem;
-
+  margin: 3rem;
   @media screen and (max-width: 900px) {
+    margin: 0px;
     margin-top: 20px;
     margin-bottom: 20px;
   }
@@ -82,6 +83,7 @@ export const Image = styled.img`
   max-width: 90%;
   height: 100%;
   border-radius: 40px;
+
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Shadow effect */
   @media screen and (max-width: 900px) {
     width: 100%;

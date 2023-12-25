@@ -10,7 +10,7 @@ import {
   Button as Btn,
   Typography,
 } from "@mui/material";
-import { Button } from "@mui/joy";
+import { Button, Textarea } from "@mui/joy";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase files/firebase";
 import React, { useState } from "react";
@@ -84,7 +84,9 @@ const ProjectSection = ({
             error={error === "title" && true}
             helperText={error === "title" && "Please enter a project title"}
           />
-          <TextField
+
+          <Textarea
+            minRows={5}
             placeholder="project description"
             sx={textFieldSX}
             onChange={(e) => {
@@ -96,7 +98,9 @@ const ProjectSection = ({
               error === "description" &&
               "Please enter description for the project"
             }
+            variant="outlined"
           />
+
           <TextField
             placeholder="project github link"
             sx={textFieldSX}
