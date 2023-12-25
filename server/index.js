@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
+
 import express from "express";
+
 import cors from "cors";
 import Users from "./models/user.js";
 import Portfolios from "./models/portfolio.js";
 
-dotenv.config();
 const app = express();
 
 //middlewares
@@ -218,14 +218,23 @@ app.get("/", (req, res) => {
     status: 200,
   });
 });
+
 app.get("/login", (req, res) => {
   res.status(200).send({
-    message: "login working!",
+    message: "Login working!",
     status: 200,
   });
 });
 
-//server
+// Catch-all route for undefined routes
+app.all("*", (req, res) => {
+  res.status(404).send({
+    message: "Not Found bro",
+    status: 404,
+  });
+});
+
+// Server
 app.listen(3001, () => {
   console.log("Server is running on port 3001");
   connectDB();
