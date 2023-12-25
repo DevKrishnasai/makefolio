@@ -212,6 +212,19 @@ app.get("/portfolio/:id", async (req, res) => {
   }
 });
 
+app.get("/", (req, res) => {
+  res.status(200).send({
+    message: "Hello server working!",
+    status: 200,
+  });
+});
+app.get("/login", (req, res) => {
+  res.status(200).send({
+    message: "login working!",
+    status: 200,
+  });
+});
+
 //server
 app.listen(3001, () => {
   console.log("Server is running on port 3001");

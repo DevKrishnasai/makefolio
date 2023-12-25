@@ -32,7 +32,7 @@ const Login = ({ setUser, toggle, setToggle, user }) => {
       setError("password");
     } else {
       setIsLoading(true);
-      await fetch("http://localhost:5000/login", {
+      await fetch("https://portfolio-maker-olive.vercel.app/login", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
