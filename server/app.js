@@ -6,7 +6,7 @@ const cors = require("cors");
 const app = express();
 require("dotenv/config");
 
-const errorHandler = require("./helpers/error-handler.js/index.js");
+const errorHandler = require("./helpers/error-handler.js");
 
 app.use(cors());
 app.options("*", cors());
