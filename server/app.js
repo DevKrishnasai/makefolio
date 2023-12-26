@@ -1,67 +1,56 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const morgan = require("morgan");
 const mongoose = require("mongoose");
 const cors = require("cors");
-
-const Auth = require("./routes/auth");
-const Portfolio = require("./routes/portfolio");
-const DeleteUser = require("./routes/deleteUser");
-const Test = require("./routes/test");
 const app = express();
+require("dotenv/config");
 
-//middlewares
-app.use(express.json());
+const errorHandler = require("./helpers/error-handler");
+
 app.use(cors());
 app.options("*", cors());
 
+// Middlewares
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
+app.use(morgan("tiny"));
 app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
-app.use("/api/v1/auth", Auth);
+app.use(errorHandler);
 
-app.use("/api/v1/test", Test);
-app.use("/api/v1/portfolio", Portfolio);
-app.use("/api/v1/deleteuser", DeleteUser);
-//Db connection
-const connectDB = () => {
-  mongoose
-    .connect(
-      "mongodb+srv://portfolio:portfolio@portfolio-cluster.wr5e8hj.mongodb.net/",
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }
-    )
-    .then(() => console.log("Connect to database"))
-    .catch((err) => console.log(err));
-};
+const api = "/api/v1";
+const usersRoute = require("./routes/users");
+const deleteUserRoute = require("./routes/deleteusers");
+const portfolioRoute = require("./routes/portfolios");
+const testRoute = require("./routes/tests");
 
-mongoose.connection.on("connected", () => {
-  console.log("MongoDB connected again");
-});
-mongoose.connection.on("error", (err) => {
-  console.log("MongoDB error", err);
-});
-mongoose.connection.on("disconnected", () => {
-  console.log("MongoDB disconnected");
-});
+// Routes
 
-app.get("/", (req, res) => {
-  res.status(200).send({
-    message: "Hello server working!",
-    status: 200,
+app.use(`${api}/users`, usersRoute);
+app.use(`${api}/deleteusers`, deleteUserRoute);
+app.use(`${api}/portfolios`, portfolioRoute);
+app.use(`${api}/tests`, testRoute);
+
+const dbConfig = require("./config/database.config.js");
+
+mongoose.Promise = global.Promise;
+
+// Connecting to the database
+mongoose
+  .connect(dbConfig.url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  })
+  .then(() => {
+    console.log("Successfully connected to the database");
+  })
+  .catch((err) => {
+    console.log("Could not connect to the database. Exiting now...", err);
+    process.exit();
   });
-});
 
-app.all("*", (req, res) => {
-  res.status(404).send({
-    message: "Not Found bro",
-    status: 404,
-  });
-});
-
-// Server
-app.listen(3001, () => {
-  console.log("Server is running on port 3001");
-  connectDB();
+// listen for requests
+app.listen(5000 || 4000, () => {
+  console.log("Server is listening on port 5000");
 });
