@@ -4,9 +4,6 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
-require("dotenv/config");
-
-const errorHandler = require("./helpers/error-handler");
 
 app.use(cors());
 app.options("*", cors());
@@ -16,7 +13,6 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(morgan("tiny"));
 app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
-app.use(errorHandler);
 
 const api = "/api/v1";
 const usersRoute = require("./routes/users");
@@ -25,7 +21,6 @@ const portfolioRoute = require("./routes/portfolios");
 const testRoute = require("./routes/tests");
 
 // Routes
-
 app.use(`${api}/users`, usersRoute);
 app.use(`${api}/deleteusers`, deleteUserRoute);
 app.use(`${api}/portfolios`, portfolioRoute);
@@ -49,6 +44,10 @@ mongoose
     console.log("Could not connect to the database. Exiting now...", err);
     process.exit();
   });
+
+app.get("/", (req, res) => {
+  res.send("server working man!!!!!!");
+});
 
 // listen for requests
 app.listen(5000 || 4000, () => {

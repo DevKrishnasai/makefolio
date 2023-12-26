@@ -1,3 +1,3 @@
 module.exports = {
-  url: "mongodb+srv://ambatikrishnasai1301:l3Sm0EeoZGOI4UPT@cluster0.uai9kom.mongodb.net/",
+  url: "mongodb+srv://devkrishna:7vK78RPLV7TexCz2@makfolio.r3cq38v.mongodb.net/portfolioDB",
 };
