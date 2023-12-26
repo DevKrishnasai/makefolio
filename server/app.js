@@ -33,15 +33,9 @@ app.use(`${api}/tests`, testRoute);
 
 const dbConfig = require("./config/database.config.js");
 
-mongoose.Promise = global.Promise;
-
 // Connecting to the database
 mongoose
-  .connect(dbConfig.url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  })
+  .connect(dbConfig.url)
   .then(() => {
     console.log("Successfully connected to the database");
   })
@@ -55,6 +49,6 @@ app.get("/", (req, res) => {
 });
 
 // listen for requests
-app.listen(5000 || 4000, () => {
-  console.log("Server is listening on port 5000");
+app.listen(4006, () => {
+  console.log("Server is listening on port 4006");
 });
