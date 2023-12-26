@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const portfolioSchema = new mongoose.Schema({
   logoName: {
@@ -49,4 +49,4 @@ const portfolioSchema = new mongoose.Schema({
   hero_url: String,
 });
 
-export default mongoose.model("Portfolios", portfolioSchema);
+module.exports = mongoose.model("Portfolios", portfolioSchema);

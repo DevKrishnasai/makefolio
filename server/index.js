@@ -1,23 +1,38 @@
-import mongoose from "mongoose";
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const cors = require("cors");
 
-import express from "express";
-
-import cors from "cors";
-import Users from "./models/user.js";
-import Portfolios from "./models/portfolio.js";
-
+const Auth = require("./routes/auth");
+const Portfolio = require("./routes/portfolio");
+const DeleteUser = require("./routes/deleteUser");
+const Test = require("./routes/test");
+// const errorHandler = require("./error");
 const app = express();
 
 //middlewares
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.options("*", cors());
 
+// app.use(bodyParser.json({ limit: "50mb" }));
+// app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
+app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
+// app.use(errorHandler);
+app.use("/api/v1/auth", Auth);
+
+app.use("/api/v1/test", Test);
+app.use("/api/v1/portfolio", Portfolio);
+app.use("/api/v1/deleteuser", DeleteUser);
 //Db connection
 const connectDB = () => {
   mongoose
     .connect(
-      "mongodb+srv://portfolio:portfolio@portfolio-cluster.wr5e8hj.mongodb.net/"
+      "mongodb+srv://portfolio:portfolio@portfolio-cluster.wr5e8hj.mongodb.net/",
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
     )
     .then(() => console.log("Connect to database"))
     .catch((err) => console.log(err));
@@ -33,185 +48,6 @@ mongoose.connection.on("disconnected", () => {
   console.log("MongoDB disconnected");
 });
 
-app.post("/register", async (req, res) => {
-  try {
-    const { email, password, name } = req.body;
-
-    // Check if the user already exists
-    const existingUser = await Users.findOne({ email });
-    if (existingUser) {
-      return res
-        .status(400)
-        .send({ message: "Email already exists.", status: 400 });
-    }
-
-    // Create a new user
-    const newUser = new Users({
-      name,
-      email,
-      password,
-    });
-
-    await newUser.save();
-    res
-      .status(201)
-      .send({ message: "Account created successfully.", status: 201 });
-  } catch (error) {
-    console.error("Error registering user:", error.message);
-    res.status(500).send({ message: "Internal server error.", status: 500 });
-  }
-});
-
-app.post("/login", async (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    // Fetch the user by email
-    const user = await Users.findOne({ email });
-
-    if (!user) {
-      return res.status(400).send({ message: "User not found.", status: 400 });
-    }
-
-    // Compare passwords
-    if (user.password !== password) {
-      return res
-        .status(401)
-        .send({ message: "Invalid credentials.", status: 401 });
-    }
-
-    // If login is successful
-    res.status(200).send({
-      message: "Login successful.",
-      status: 200,
-      portfolioId: user["portfolioId"],
-    });
-  } catch (error) {
-    console.error("Error during login:", error.message);
-    res.status(500).send({ message: "Internal server error.", status: 500 });
-  }
-});
-
-app.post("/deleteUser", async (req, res) => {
-  try {
-    const { email } = req.body;
-
-    // Find the user by emailID and delete
-    const deletedUser = await Users.findOneAndDelete({ email });
-
-    if (!deletedUser) {
-      return res.status(404).send({ message: "User not found.", status: 404 });
-    }
-
-    res.status(200).send({
-      message: "User deleted successfully.",
-      status: 200,
-    });
-  } catch (error) {
-    console.error("Error during user deletion:", error.message);
-    res.status(500).send({ message: "Internal server error.", status: 500 });
-  }
-});
-
-app.post("/checkId", async (req, res) => {
-  try {
-    const { portfolioId, email } = req.body;
-
-    // Find a user with the given portfolioId
-    const user = await Users.findOne({ portfolioId });
-
-    if (!user) {
-      // If id doesn't exist, update the user details with the provided email
-      const updatedUser = await Users.findOneAndUpdate(
-        { email: email },
-        { portfolioId: portfolioId },
-        { new: true }
-      );
-
-      if (!updatedUser) {
-        return res
-          .status(400)
-          .send({ message: "User not found.", status: 400 });
-      }
-
-      res
-        .status(200)
-        .send({ message: "User updated successfully.", status: 200 });
-    } else {
-      res.status(400).send({ message: "Already id taken", status: 400 });
-    }
-  } catch (error) {
-    console.error("Error during fetching:", error.message);
-    res.status(500).send({ message: "Internal server error.", status: 500 });
-  }
-});
-
-app.post("/portfoliodata", async (req, res) => {
-  try {
-    const {
-      logoName,
-      fullName,
-      email,
-      about,
-      tags,
-      techs,
-      tools,
-      projects,
-      links,
-      portfolioId,
-      hero_url,
-    } = req.body;
-
-    // Create the new portfolio instance
-    const newPortfolio = new Portfolios({
-      logoName,
-      fullName,
-      email,
-      about,
-      tags,
-      techs,
-      tools,
-      projects,
-      links: {
-        github: links.github,
-        linkedin: links.linkedin,
-        instagram: links.instagram,
-      },
-      portfolioId,
-      hero_url,
-    });
-
-    // Save the new portfolio to the database
-    await newPortfolio.save();
-
-    res
-      .status(201)
-      .send({ message: "Portfolio data saved successfully.", status: 201 });
-  } catch (error) {
-    console.error("Error during saving:", error.message);
-    res.status(500).send({ message: "Internal server error.", status: 500 });
-  }
-});
-
-app.get("/portfolio/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    console.log(id);
-    const portfolioData = await Portfolios.findOne({ portfolioId: id });
-    if (!portfolioData) {
-      return res
-        .status(404)
-        .send({ message: "Portfolio not found.", status: 404 });
-    }
-    res
-      .status(200)
-      .send({ message: "found portfolio", portfolioData, status: 200 });
-  } catch (error) {
-    console.error("Error during fetching:", error.message);
-    res.status(500).send({ message: "Internal server error.", status: 500 });
-  }
-});
-
 app.get("/", (req, res) => {
   res.status(200).send({
     message: "Hello server working!",
@@ -219,19 +55,16 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/login", (req, res) => {
-  res.status(200).send({
-    message: "Login working!",
-    status: 200,
-  });
-});
-
-// Catch-all route for undefined routes
 app.all("*", (req, res) => {
   res.status(404).send({
     message: "Not Found bro",
     status: 404,
   });
+});
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send({ message: "Internal server error.", status: 500 });
 });
 
 // Server
@@ -239,5 +72,3 @@ app.listen(3001, () => {
   console.log("Server is running on port 3001");
   connectDB();
 });
-
-export default app;
