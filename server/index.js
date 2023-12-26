@@ -7,7 +7,6 @@ const Auth = require("./routes/auth");
 const Portfolio = require("./routes/portfolio");
 const DeleteUser = require("./routes/deleteUser");
 const Test = require("./routes/test");
-// const errorHandler = require("./error");
 const app = express();
 
 //middlewares
@@ -15,10 +14,9 @@ app.use(express.json());
 app.use(cors());
 app.options("*", cors());
 
-// app.use(bodyParser.json({ limit: "50mb" }));
-// app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
-// app.use(errorHandler);
 app.use("/api/v1/auth", Auth);
 
 app.use("/api/v1/test", Test);
@@ -60,11 +58,6 @@ app.all("*", (req, res) => {
     message: "Not Found bro",
     status: 404,
   });
-});
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send({ message: "Internal server error.", status: 500 });
 });
 
 // Server
