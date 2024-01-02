@@ -30,6 +30,23 @@ router.post("/checkId", async (req, res) => {
   }
 });
 
+router.get("/checkId/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const user = await User.findOne({ portfolioId: id });
+
+    if (!user) {
+      return res.status(201).send({ message: "id available", status: 201 });
+    }
+
+    res.status(401).send({ message: "id not available", status: 401 });
+  } catch (error) {
+    console.error("Error during fetching:", error.message);
+    res.status(500).send({ message: "Internal server error.", status: 500 });
+  }
+});
+
 router.post("/portfoliodata", async (req, res) => {
   try {
     const {

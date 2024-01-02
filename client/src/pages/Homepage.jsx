@@ -1,10 +1,19 @@
-import { Alert, Box, Snackbar } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Snackbar,
+  SpeedDial,
+  SpeedDialAction,
+  SpeedDialIcon,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import RemainingDetailsPage from "./RemainingDetailsPage";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../firebase files/firebase";
 import styled from "styled-components";
 import HomePart1 from "./HomePart1";
+import Account from "../components/Account";
+import { AccountCircle } from "@mui/icons-material";
 
 const Homepage = ({ user, setUser }) => {
   //useState hooks to handle state changes
@@ -183,10 +192,9 @@ const Homepage = ({ user, setUser }) => {
           `https://makfolio-api.onrender.com/api/v1/portfolios/updateData/${id}`
         );
         const data = await response.json();
-        console.log(data);
+
         if (data["status"] === 200) {
           setData({ ...data["portfolio"] });
-          console.log("broooo", data["portfolio"]);
         } else {
           setData({
             logoName: "",
@@ -215,6 +223,43 @@ const Homepage = ({ user, setUser }) => {
     getUserByData();
     // setLoading(true);
   }, [id]);
+
+  //dilog boxes
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClickClose = () => {
+    setOpen(false);
+  };
+
+  const handleUpdate = async () => {
+    try {
+      fetch(`https://makfolio-api.onrender.com/api/v1/users/updateUser`, {
+        method: "put",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(user),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          if (data.status === 200) {
+            setError(false);
+            handleClickClose();
+            setUser({ ...user, portfolioId: user["updatedPortfolioId"] });
+          }
+        })
+        .catch((err) => {});
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   //main code
   return (
@@ -304,6 +349,27 @@ const Homepage = ({ user, setUser }) => {
           Deleted
         </Alert>
       </Snackbar>
+      <Account
+        handleClickOpen={handleClickOpen}
+        handleClickClose={handleClickClose}
+        open={open}
+        setOpen={setOpen}
+        user={user}
+        setUser={setUser}
+        handleUpdate={handleUpdate}
+      />
+      <SpeedDial
+        ariaLabel="SpeedDial basic example"
+        sx={{ position: "fixed", bottom: 16, right: 16 }}
+        icon={<SpeedDialIcon />}
+      >
+        <SpeedDialAction
+          key="account"
+          icon={<AccountCircle fontSize="20px" />}
+          tooltipTitle="account"
+          onClick={handleClickOpen}
+        />
+      </SpeedDial>
     </Box>
   );
 };

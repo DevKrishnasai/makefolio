@@ -9,6 +9,7 @@ const Authinicate = () => {
     name: "",
     email: "",
     portfolioId: "",
+    password: "",
   });
   return (
     <>

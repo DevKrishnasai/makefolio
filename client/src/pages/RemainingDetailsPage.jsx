@@ -49,7 +49,6 @@ const RemainingDetailsPage = ({
   const [error, setError] = useState(false);
   const [page, setPage] = useState("middle");
   const checkDetails = async () => {
-    console.log(data);
     setLoading(true);
 
     if (data["projects"].length === 0) {
