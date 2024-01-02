@@ -49,14 +49,10 @@ const ProjectSection = ({
   const uploadImage = (file) => {
     setError(false);
     setLoading(true);
-    console.log("in uploadImage");
     if (file == null) return;
-    console.log("i'm uploading image");
     const imageRef = ref(storage, `${data["fullName"]}/${file.name}`);
     uploadBytes(imageRef, file).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        console.log("Download URL:", url);
-
         setProject({ ...project, image_url: url });
         setLoading(false);
       });
@@ -66,14 +62,7 @@ const ProjectSection = ({
   return (
     <Dialog onClose={handleClose} open={open} sx={{ padding: "10px" }}>
       <DialogContent>
-        <Box
-        // sx={{
-        //   width: "100%",
-        //   border: "3px solid black",
-        //   borderRadius: "20px",
-        //   padding: "10px",
-        // }}
-        >
+        <Box>
           <TextField
             placeholder="project name"
             sx={textFieldSX}
@@ -156,9 +145,7 @@ const ProjectSection = ({
               );
             })}
           </ul>
-          {/* {loading && (
-            <Button loading sx={{ width: "100%" }} variant="plain"></Button>
-          )} */}
+
           {loading && (
             <div style={{ display: "flex", justifyContent: "center" }}>
               <div class="wrapper">

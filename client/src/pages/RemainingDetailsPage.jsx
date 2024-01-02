@@ -182,9 +182,6 @@ const RemainingDetailsPage = ({
                       <Typography level="title-lg" fontWeight={800}>
                         {project["title"]}
                       </Typography>
-                      {/* <Typography level="body-sm">
-                  April 24 to May 02, 2021
-                </Typography> */}
                       <IconButton
                         aria-label="bookmark Bahamas Islands"
                         variant="plain"
@@ -206,15 +203,12 @@ const RemainingDetailsPage = ({
                         loading="lazy"
                         alt="nope"
                         style={{
-                          // width: "100%",
-                          // height: "100%",
                           objectFit: "fill",
                         }}
                       />
                     </AspectRatio>
                     <CardContent orientation="horizontal">
                       <div>
-                        {/* <Typography level="body-xs">Total price:</Typography> */}
                         <Typography
                           fontSize="lg"
                           fontWeight="lg"
@@ -270,8 +264,7 @@ const RemainingDetailsPage = ({
               sx={{
                 position: "fixed",
                 bottom: "10px",
-                // left: "50%",
-                // transform: "translateX(-50%)",
+
                 width: {
                   xs: "60%",
                   lg: "600px",
@@ -320,13 +313,11 @@ const RemainingDetailsPage = ({
             textAlign: "center",
             padding: "20px",
             borderRadius: "30px",
-            // height: "200px",
             margin: "20px",
             ":hover": {
               cursor: "pointer",
               boxShadow:
                 "0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23)",
-              // transform: "scale(1.05)",
             },
           }}
           elevation={3}
@@ -340,10 +331,33 @@ const RemainingDetailsPage = ({
             Thank You for Using Our Service!
           </Typography>
           <Typography variant="body1" component="p" fontWeight={400}>
-            If this service helped you out, check out my portfolio and linkedin
+            If this service helped you, check out my portfolio and linkedin
             profile for more projects
           </Typography>
-
+          <Typography
+            sx={{
+              margin: "10px 0px 5px 0px",
+              padding: "10px",
+              "&:hover": {
+                fontSize: "20px",
+                color: "white",
+                backgroundColor: "black",
+                borderRadius: "10px",
+              },
+            }}
+          >
+            <a
+              href={`https://makfolio.vercel.app/${user["portfolioId"]}`}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                fontWeight: 600,
+                fontSize: "20px",
+              }}
+            >
+              {`https://makfolio.vercel.app/${user["portfolioId"]}`}
+            </a>
+          </Typography>
           <Box>
             <IconButton href="https://github.com/DevKrishnasai" target="_blank">
               <GitHub sx={{ color: "black", fontSize: "36px" }} />
