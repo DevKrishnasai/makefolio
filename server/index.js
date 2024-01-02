@@ -19,10 +19,10 @@ app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
 app.use(errorHandler);
 
 const api = "/api/v1";
-const usersRoute = require("./routes/users");
-const deleteUserRoute = require("./routes/deleteusers");
-const portfolioRoute = require("./routes/portfolios");
-const testRoute = require("./routes/tests");
+const usersRoute = require("./routes/users.js");
+const deleteUserRoute = require("./routes/deleteusers.js");
+const portfolioRoute = require("./routes/portfolios.js");
+const testRoute = require("./routes/tests.js");
 
 // Routes
 
