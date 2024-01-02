@@ -22,7 +22,8 @@ function Home() {
         const data = await response.json();
         console.log(data);
         if (data["status"] === 200) {
-          setUserData(data);
+          setUserData(data["user"]);
+          console.log("broooo", data["user"]);
         } else {
           setUserData(null);
         }
@@ -60,10 +61,10 @@ function Home() {
         </div>
       ) : (
         <>
-          <Hero data={userData["portfolioData"]} />
-          <About data={userData["portfolioData"]} />
-          <Projects data={userData["portfolioData"]} />
-          <Contact data={userData["portfolioData"]} />
+          <Hero data={userData} />
+          <About data={userData} />
+          <Projects data={userData} />
+          <Contact data={userData} />
           <Footer />
           <ScrollToTop />
         </>
