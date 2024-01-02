@@ -56,14 +56,17 @@ const RemainingDetailsPage = ({
       setLoading(false);
     } else {
       setError(false);
-      await fetch("http://localhost:5000/portfoliodata", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(data),
-      })
+      await fetch(
+        "https://makfolio-api.onrender.com/api/v1/portfolios/portfoliodata",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      )
         .then((res) => {
           return res.json();
         })

@@ -72,14 +72,17 @@ export default function Intropage({
       setLoading(false);
       setError(true);
     } else {
-      await fetch("http://localhost:5000/checkId", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({ portfolioId: name, email: values["email"] }),
-      })
+      await fetch(
+        "https://makfolio-api.onrender.com/api/v1/portfolios/checkId",
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ portfolioId: name, email: values["email"] }),
+        }
+      )
         .then((res) => {
           return res.json();
         })
@@ -107,7 +110,7 @@ export default function Intropage({
 
   const handleCopy = () => {
     navigator.clipboard
-      .writeText(`https://devkrishnasai.vercel.app/${name}`)
+      .writeText(`https://makfolio.vercel.app/${name}`)
       .then(() => {
         setCopied(true);
         setTimeout(() => {

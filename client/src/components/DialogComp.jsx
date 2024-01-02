@@ -32,14 +32,17 @@ export default function DialogComp({
 
   const handleClose = async () => {
     try {
-      await fetch("http://localhost:5000/deleteUser", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({ email: values["email"] }),
-      })
+      await fetch(
+        "https://makfolio-api.onrender.com/api/v1/deleteusers/deleteUser",
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ email: values["email"] }),
+        }
+      )
         .then((result) => {
           return result.json();
         })

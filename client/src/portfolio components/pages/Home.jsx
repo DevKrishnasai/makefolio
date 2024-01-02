@@ -16,7 +16,9 @@ function Home() {
   useEffect(() => {
     const getUserById = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/portfolio/${id}`);
+        const response = await fetch(
+          `https://makfolio-api.onrender.com/api/v1/portfolios/portfolio/${id}`
+        );
         const data = await response.json();
         console.log(data);
         if (data["status"] === 200) {

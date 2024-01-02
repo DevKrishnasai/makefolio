@@ -32,7 +32,7 @@ const Login = ({ setUser, toggle, setToggle, user }) => {
       setError("password");
     } else {
       setIsLoading(true);
-      await fetch("https://makfolio-api.vercel.app/login", {
+      await fetch("https://makfolio-api.onrender.com/api/v1/users/login", {
         method: "post",
         headers: {
           "Content-Type": "application/json",

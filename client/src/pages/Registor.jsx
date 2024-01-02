@@ -47,7 +47,7 @@ const Register = ({ setUser, toggle, setToggle, user }) => {
       setError("confirmPassword");
     } else {
       setIsLoading(true);
-      await fetch("http://localhost:5000/register", {
+      await fetch("https://makfolio-api.onrender.com/api/v1/users/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
