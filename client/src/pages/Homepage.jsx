@@ -13,7 +13,7 @@ import { storage } from "../firebase files/firebase";
 import styled from "styled-components";
 import HomePart1 from "./HomePart1";
 import Account from "../components/Account";
-import { AccountCircle, Edit } from "@mui/icons-material";
+import { Edit, Man2 } from "@mui/icons-material";
 
 const Homepage = ({ user, setUser }) => {
   //useState hooks to handle state changes
@@ -360,14 +360,13 @@ const Homepage = ({ user, setUser }) => {
       />
       <SpeedDial
         ariaLabel="SpeedDial basic example"
-        sx={{ position: "fixed", bottom: 16, right: 16 }}
-        icon={
-          <SpeedDialIcon sx={{ backgroundColor: "black", color: "white" }} />
-        }
+        sx={{ position: "fixed", top: 16, right: 16 }}
+        icon={<SpeedDialIcon openIcon={<Edit />} />}
+        direction="down"
       >
         <SpeedDialAction
           key="account"
-          icon={<Edit />}
+          icon={<Man2 />}
           tooltipTitle="account"
           onClick={handleClickOpen}
         />

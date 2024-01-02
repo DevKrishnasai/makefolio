@@ -294,7 +294,7 @@ const RemainingDetailsPage = ({
                   xs: "50px",
                   lg: "40px",
                 },
-                left: {
+                right: {
                   xs: "20px",
                   lg: "40px",
                 },
