@@ -67,7 +67,8 @@ Makfolio is a portfolio maker application built using the MERN stack (MongoDB, E
 4. **Environment Variables:**
       To run the application, you need to set up a `.env` file in the root folder `/server` with the following environment variables:
       **Create a `.env` file in the root folder `/server`:**
-   
+
+         PORT = 3000
          MONGO_DB_URL = [Your MongoDB Connection URL]
          API_PATH = /api/version
    
