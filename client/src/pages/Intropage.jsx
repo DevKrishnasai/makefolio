@@ -47,7 +47,6 @@ export default function Intropage({
   const handleNext = (index) => {
     if (index === 2) {
       setUser(values);
-
       setPage(false);
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);

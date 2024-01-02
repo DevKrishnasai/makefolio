@@ -11,7 +11,14 @@ app.use(cors());
 app.options("*", cors());
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-app.use(morgan("tiny"));
+app.use(morgan("dev"));
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    message: "Internal server error.",
+    status: 500,
+  });
+});
 
 const usersRoute = require("./routes/users.js");
 const deleteUserRoute = require("./routes/deleteusers.js");
@@ -27,7 +34,10 @@ app.use(`${api}/tests`, testRoute);
 
 // Connecting to the database
 mongoose
-  .connect(process.env.MONGO_DB_URL)
+  .connect(process.env.MONGO_DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("Successfully connected to the database");
   })

@@ -1,5 +1,5 @@
 import { Alert, Box, Snackbar } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RemainingDetailsPage from "./RemainingDetailsPage";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../firebase files/firebase";
@@ -173,6 +173,48 @@ const Homepage = ({ user, setUser }) => {
       });
     });
   };
+
+  const id = user["portfolioId"];
+  useEffect(() => {
+    const getUserByData = async () => {
+      // setLoading(true);
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/v1/portfolios/updateData/${id}`
+        );
+        const data = await response.json();
+        console.log(data);
+        if (data["status"] === 200) {
+          setData({ ...data["portfolio"] });
+          console.log("broooo", data["portfolio"]);
+        } else {
+          setData({
+            logoName: "",
+            fullName: "",
+            email: "",
+            about: "",
+            tags: [],
+            techs: [],
+            tools: [],
+            projects: [],
+            links: {
+              github: "",
+              linkedin: "",
+              instagram: "",
+            },
+            portfolioId: user["portfolioId"],
+            hero_url: "",
+          });
+        }
+
+        // setLoading(false);
+      } catch (e) {
+        console.error("Error fetching user data:", e);
+      }
+    };
+    getUserByData();
+    // setLoading(true);
+  }, [id]);
 
   //main code
   return (

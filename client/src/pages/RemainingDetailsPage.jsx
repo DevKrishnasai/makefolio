@@ -49,36 +49,39 @@ const RemainingDetailsPage = ({
   const [error, setError] = useState(false);
   const [page, setPage] = useState("middle");
   const checkDetails = async () => {
+    console.log(data);
     setLoading(true);
+
     if (data["projects"].length === 0) {
       setError(true);
       setPage("middle");
       setLoading(false);
-    } else {
-      setError(false);
-      await fetch(
-        "https://makfolio-api.onrender.com/api/v1/portfolios/portfoliodata",
+      return; // Exit the function early if there are no projects
+    }
+
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/v1/portfolios/portfoliodata",
         {
-          method: "POST",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
           },
           body: JSON.stringify(data),
         }
-      )
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          if (data.status === 201) {
-            setPage("end");
-          }
-          setLoading(false);
-        })
-        .catch((err) => {
-          alert("Error: " + err.message);
-        });
+      );
+
+      const responseData = await response.json();
+
+      if (responseData.status === 201) {
+        setPage("end");
+      }
+
+      setLoading(false);
+    } catch (error) {
+      console.log("Error: " + error.message);
+      setLoading(false);
     }
   };
 
