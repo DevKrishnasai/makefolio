@@ -77,7 +77,7 @@ router.get("/portfolio/:id", async (req, res) => {
   try {
     const { id } = req.params;
     console.log(id);
-    const user = await Portfolio.findOne({ email: "example@email.com" });
+    const user = await Portfolio.findOne({ portfolioId: id });
     // const userObject = Portfolio.toObject({ getters: true, virtuals: false });
     // const portfolioData = Portfolio.findOne({ portfolioId: id });
     if (!user) {
