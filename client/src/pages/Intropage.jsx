@@ -46,7 +46,6 @@ export default function Intropage({
 
   const handleNext = (index) => {
     if (index === 2) {
-      console.log(user);
       setUser(values);
 
       setPage(false);
@@ -100,7 +99,6 @@ export default function Intropage({
         .catch((err) => {
           setError(true);
           setId(false);
-          console.log(err);
         });
       setLoading(false);
     }

@@ -69,7 +69,6 @@ const Register = ({ setUser, toggle, setToggle, user }) => {
           }
         })
         .catch((err) => {
-          console.log(err);
           setServerError(err.message);
           setIsLoading(false);
         });

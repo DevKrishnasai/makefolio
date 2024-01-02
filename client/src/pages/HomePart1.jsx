@@ -94,12 +94,6 @@ const HomePart1 = ({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        // height: {
-        //   xs: "100vh",
-        //   sm: "100vh",
-        //   md: "100vh",
-        //   lg: "100%",
-        // },
       }}
     >
       <Stack
@@ -203,7 +197,7 @@ const HomePart1 = ({
           }
         />
         <TextField
-          label="Enter tags"
+          label="Enter tags (ex: React Developer )(You can add many tags) "
           onChange={(e) => {
             setTagsController(e.target.value);
             setError("");
@@ -238,7 +232,7 @@ const HomePart1 = ({
         </ul>
         <Textarea
           minRows={5}
-          placeholder="Enter about yourself...."
+          placeholder="Enter about yourself....(Here you can also highlight some texts by wrapping them in <b></b> and you can use other html tags to decorate text ex: b,i,small... tags)"
           sx={textBoxSX}
           onClick={(e) => {
             error === "about" && setError("");
@@ -251,7 +245,7 @@ const HomePart1 = ({
           }
         />
         <TextField
-          label="Enter technologies you are familiar with..."
+          label="Enter technologies (Like HTML,CSS,JS.... make sure to instert one by one)"
           onChange={(e) => {
             setTechsController(e.target.value);
             setError("");
@@ -286,18 +280,16 @@ const HomePart1 = ({
         </ul>
         <TextField
           sx={{ ...textBoxSX, width: "100%" }}
-          label="Enter tools you are familiar with..."
+          label="Enter tools (Like VS Code, Android Studio, Postman....)"
           onChange={(e) => {
             setToolsController(e.target.value);
             setError("");
           }}
           onKeyDown={(e) => addLines(e, "tools", toolsController)}
           value={toolsController}
-          // sx={textBoxSX}
           InputProps={{
             endAdornment: (
               <InputAdornment position="start">
-                {/* <Hint hint="Press 'Enter Key' to insert multiple Tool Names" /> */}
                 <ConstructionRounded />
               </InputAdornment>
             ),
@@ -519,7 +511,7 @@ const HomePart1 = ({
                   ),
                 }}
                 error={error === "fullName" && true}
-                helperText={error === "fullName" && "Please enter a full name"}
+                helperText={error === "fullName" && "Please enter full name"}
               />
             </Stack>
             <TextField
@@ -548,7 +540,7 @@ const HomePart1 = ({
           <>
             <Textarea
               minRows={5}
-              placeholder="Enter about yourself...."
+              placeholder="Enter about yourself....(Here you can also highlight some texts by wrapping them in <b></b> and you can use other html tags to decorate text ex: b,i,small... tags)"
               sx={textBoxSX}
               onClick={(e) => {
                 error === "about" && setError("");
@@ -561,7 +553,7 @@ const HomePart1 = ({
               }
             />
             <TextField
-              label="Enter tags"
+              label="Enter tags (ex: React Developer )(You can add many tags)"
               onChange={(e) => {
                 setTagsController(e.target.value);
                 setError("");
@@ -599,7 +591,7 @@ const HomePart1 = ({
         {next === 3 && (
           <>
             <TextField
-              label="Enter technologies you are familiar with..."
+              label="Enter technologies (Like HTML,CSS,JS.... make sure to instert one by one)"
               onChange={(e) => {
                 setTechsController(e.target.value);
                 setError("");
@@ -638,7 +630,7 @@ const HomePart1 = ({
           <>
             <TextField
               sx={{ ...textBoxSX, width: "100%" }}
-              label="Enter tools you are familiar with..."
+              label="Enter tools (Like VS Code, Android Studio, Postman....)"
               onChange={(e) => {
                 setToolsController(e.target.value);
                 setError("");

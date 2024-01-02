@@ -113,7 +113,7 @@ const ProjectSection = ({
             error={error === "github_live_link" && true}
             helperText={
               error === "github_live_link" &&
-              "Please paste live link of the project"
+              "Please paste live link of the project else place #"
             }
           />
           <TextField

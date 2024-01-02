@@ -63,7 +63,7 @@ const Homepage = ({ user, setUser }) => {
   };
 
   const addLines = (e, str, controller, other = false) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && controller !== "") {
       if (other) {
         handleClickAdd();
         const sample = [...project[str], { key: counter, value: controller }];
@@ -92,7 +92,6 @@ const Homepage = ({ user, setUser }) => {
     setData({ ...data, projects: temp });
     setProjectsController([]);
     handleClickAdd();
-    console.log(data);
   };
 
   const deleteProject = (title) => {
@@ -146,7 +145,6 @@ const Homepage = ({ user, setUser }) => {
     } else {
       setError("");
       setPage("middle");
-      console.log(data);
     }
   };
 
@@ -166,14 +164,10 @@ const Homepage = ({ user, setUser }) => {
   const uploadImage = (file) => {
     setError(false);
     setLoading(true);
-    console.log("in uploadImage");
     if (file == null) return;
-    console.log("i'm uploading image");
     const imageRef = ref(storage, `${data["fullName"]}/${file.name}`);
     uploadBytes(imageRef, file).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-        console.log("Download URL:", url);
-
         setData({ ...data, hero_url: url });
         setLoading(false);
       });
