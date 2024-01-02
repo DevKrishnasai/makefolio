@@ -180,7 +180,7 @@ const Homepage = ({ user, setUser }) => {
       // setLoading(true);
       try {
         const response = await fetch(
-          `http://localhost:5000/api/v1/portfolios/updateData/${id}`
+          `https://makfolio-api.onrender.com/api/v1/portfolios/updateData/${id}`
         );
         const data = await response.json();
         console.log(data);

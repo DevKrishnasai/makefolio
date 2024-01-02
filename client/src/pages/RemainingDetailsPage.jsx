@@ -56,12 +56,12 @@ const RemainingDetailsPage = ({
       setError(true);
       setPage("middle");
       setLoading(false);
-      return; // Exit the function early if there are no projects
+      return;
     }
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/v1/portfolios/portfoliodata",
+        "https://makfolio-api.onrender.com/api/v1/portfolios/portfoliodata",
         {
           method: "PUT",
           headers: {

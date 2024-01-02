@@ -495,6 +495,7 @@ const HomePart1 = ({
                 }}
                 error={error === "logoName" && true}
                 helperText={error === "logoName" && "Please enter a logo name"}
+                value={data["logoName"]}
               />
               <TextField
                 type="text"
@@ -519,6 +520,7 @@ const HomePart1 = ({
                 }}
                 error={error === "fullName" && true}
                 helperText={error === "fullName" && "Please enter full name"}
+                value={data["fullName"]}
               />
             </Stack>
             <TextField
@@ -540,6 +542,7 @@ const HomePart1 = ({
               helperText={
                 error === "email" && "Please enter a formated email address "
               }
+              value={data["email"]}
             />
           </div>
         )}
@@ -558,6 +561,7 @@ const HomePart1 = ({
               defaultValue={
                 error === "about" ? "Please enter few lines about yourself" : ""
               }
+              value={data["about"]}
             />
             <TextField
               label="Enter tags (ex: React Developer )(You can add many tags)"
@@ -696,6 +700,7 @@ const HomePart1 = ({
               }}
               error={error === "github" && true}
               helperText={error === "github" && "Please paste the github link"}
+              value={data["links"]["github"]}
             />
             <TextField
               label="Linkedin Link"
@@ -719,6 +724,7 @@ const HomePart1 = ({
               helperText={
                 error === "linkedin" && "Please paste the linkedin link"
               }
+              value={data["links"]["linkedin"]}
             />
             <TextField
               label="Instagram Link"
@@ -742,6 +748,7 @@ const HomePart1 = ({
               helperText={
                 error === "instagram" && "Please paste the instagram link"
               }
+              value={data["links"]["instagram"]}
             />
             {loading && (
               <div style={{ display: "flex", justifyContent: "center" }}>
