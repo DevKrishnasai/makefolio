@@ -118,10 +118,27 @@ router.put("/portfoliodata", async (req, res) => {
     let updatedPortfolio = await Portfolio.findOne({ portfolioId });
 
     if (!updatedPortfolio) {
-      return res.status(404).json({
-        message: "Portfolio not found.",
-        status: 404,
+      const newPortfolio = Portfolio({
+        logoName,
+        fullName,
+        email,
+        about,
+        tags,
+        techs,
+        tools,
+        projects,
+        links: {
+          github: links.github,
+          linkedin: links.linkedin,
+          instagram: links.instagram,
+        },
+        portfolioId,
+        hero_url,
       });
+      await newPortfolio.save();
+      return res
+        .status(201)
+        .send({ message: "Portfolio data saved successfully.", status: 201 });
     }
 
     updatedPortfolio.logoName = logoName;
