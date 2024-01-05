@@ -812,6 +812,7 @@ const HomePart1 = ({
               checkSubForm();
             }}
             variant="contained"
+            sx={{ my: "10px" }}
           >
             Next
           </Button>

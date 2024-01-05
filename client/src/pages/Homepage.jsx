@@ -18,6 +18,7 @@ import { Edit, Man2 } from "@mui/icons-material";
 const Homepage = ({ user, setUser }) => {
   //useState hooks to handle state changes
   const [page, setPage] = useState("home");
+  const [hide, setHide] = useState(false);
   const [counter, setCounter] = useState(1);
   const [tagsController, setTagsController] = useState("");
   const [techsController, setTechsController] = useState("");
@@ -255,7 +256,9 @@ const Homepage = ({ user, setUser }) => {
             setUser({ ...user, portfolioId: user["updatedPortfolioId"] });
           }
         })
-        .catch((err) => {});
+        .catch((err) => {
+          console.log(err);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -269,6 +272,7 @@ const Homepage = ({ user, setUser }) => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        minHeight: "100vh",
       }}
     >
       {page === "home" && (
@@ -307,6 +311,8 @@ const Homepage = ({ user, setUser }) => {
           handleClickAdd={handleClickAdd}
           handleClickDelete={handleClickDelete}
           user={user}
+          hide={hide}
+          setHide={setHide}
         />
       )}
 
@@ -349,6 +355,7 @@ const Homepage = ({ user, setUser }) => {
           Deleted
         </Alert>
       </Snackbar>
+
       <Account
         handleClickOpen={handleClickOpen}
         handleClickClose={handleClickClose}
@@ -358,19 +365,21 @@ const Homepage = ({ user, setUser }) => {
         setUser={setUser}
         handleUpdate={handleUpdate}
       />
-      <SpeedDial
-        ariaLabel="SpeedDial basic example"
-        sx={{ position: "fixed", top: 16, right: 16 }}
-        icon={<SpeedDialIcon openIcon={<Edit />} />}
-        direction="down"
-      >
-        <SpeedDialAction
-          key="account"
-          icon={<Man2 />}
-          tooltipTitle="account"
-          onClick={handleClickOpen}
-        />
-      </SpeedDial>
+      {!hide && (
+        <SpeedDial
+          ariaLabel="SpeedDial basic example"
+          sx={{ position: "fixed", top: 10, right: 10 }}
+          icon={<SpeedDialIcon openIcon={<Edit />} />}
+          direction="down"
+        >
+          <SpeedDialAction
+            key="account"
+            icon={<Man2 />}
+            tooltipTitle="account"
+            onClick={handleClickOpen}
+          />
+        </SpeedDial>
+      )}
     </Box>
   );
 };

@@ -25,6 +25,8 @@ const RemainingDetailsPage = ({
   handleClickDelete,
   deleteProject,
   user,
+  hide,
+  setHide,
 }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -75,6 +77,7 @@ const RemainingDetailsPage = ({
 
       if (responseData.status === 201) {
         setPage("end");
+        setHide(true);
       }
 
       setLoading(false);

@@ -56,10 +56,33 @@ router.put("/updateUser", async (req, res) => {
     const { updatedPortfolioId, email, password, portfolioId } = req.body;
 
     const user = await User.findOne({ portfolioId });
-    const portfolio = await Portfolio.findOne({ portfolioId });
+    let portfolio = await Portfolio.findOne({ portfolioId });
 
-    if (!user || !portfolio) {
+    if (!user) {
       return res.status(404).send({ message: "user not exists.", status: 400 });
+    }
+
+    if (!portfolio) {
+      // create portfolio
+      const newPortfolio = Portfolio({
+        logoName: "",
+        fullName: "",
+        email: "",
+        about: "",
+        tags: [],
+        techs: [],
+        tools: [],
+        projects: [],
+        links: {
+          github: "",
+          linkedin: "",
+          instagram: "",
+        },
+        portfolioId: "",
+        hero_url: "",
+      });
+      await newPortfolio.save();
+      portfolio = newPortfolio;
     }
 
     user.email = email;
