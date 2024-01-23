@@ -1,4 +1,6 @@
-# Makfolio: Portfolio Maker Application
+# Makfolio: Portfolio Maker Application  
+
+
 
 ![MERN Stack](https://img.shields.io/badge/MERN-Stack-blue) ![Firebase](https://img.shields.io/badge/Firebase-Integration-yellow)
 
