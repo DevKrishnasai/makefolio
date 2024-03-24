@@ -4,7 +4,7 @@
 
 ![MERN Stack](https://img.shields.io/badge/MERN-Stack-blue) ![Firebase](https://img.shields.io/badge/Firebase-Integration-yellow)
 
-Makfolio is a portfolio maker application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) and Firebase. This application allows users to create and manage their portfolios efficiently and host them globally without any other deployments.
+makefolio is a portfolio maker application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) and Firebase. This application allows users to create and manage their portfolios efficiently and host them globally without any other deployments.
 
 ## 📚 Table of Contents
 
@@ -39,11 +39,11 @@ Makfolio is a portfolio maker application built using the MERN stack (MongoDB, E
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/DevKrishnasai/makfolio.git
+   git clone https://github.com/DevKrishnasai/makefolio.git
    ```
 2. **Navigate to the Project Directory:**
    ```bash
-   cd makfolio
+   cd makefolio
    ```
 3. **Now open two terminals and Navigate**:
       #### -Frontend
