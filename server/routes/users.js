@@ -107,13 +107,17 @@ router.put("/updateUser", async (req, res) => {
   }
 });
 
-router.get("/getUsers", async (req, res) => {
+router.get("/getUsers/:id", async (req, res) => {
   try {
-    const users = await User.find({});
-    console.log("Users fetched successfully:", users);
-    res
-      .status(200)
-      .send({ message: "Users fetched successfully.", status: 200, users });
+    const { id } = req.params;
+    if (id === process.env.ADMIN_PASS) {
+      const users = await User.find({});
+      console.log("Users fetched successfully:", users);
+      res
+        .status(200)
+        .send({ message: "Users fetched successfully.", status: 200, users });
+    }
+    res.status(401).send({ message: "Unauthorized.", status: 401 });
   } catch (error) {
     console.error("Error getting users:", error.message);
     res.status(500).send({ message: "Internal server error.", status: 500 });

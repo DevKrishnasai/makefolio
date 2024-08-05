@@ -1,6 +1,4 @@
-# Makefolio: Portfolio Maker Application  
-
-
+# Makefolio: Portfolio Maker Application
 
 ![MERN Stack](https://img.shields.io/badge/MERN-Stack-blue) ![Firebase](https://img.shields.io/badge/Firebase-Integration-yellow)
 
@@ -37,66 +35,44 @@ makefolio is a portfolio maker application built using the MERN stack (MongoDB, 
 
 ### Installation Steps
 
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/DevKrishnasai/makefolio.git
-   ```
-2. **Navigate to the Project Directory:**
-   ```bash
-   cd makefolio
-   ```
-3. **Now open two terminals and Navigate**:
-      #### -Frontend
-      ```bash
-      cd client
-      ```
-      ```bash
-      npm i --legacy-peer-deps
-      ```
-      ```bash
-      npm start 
-      ```
-      #### -Backend
-      ```bash
-      cd server
-      ```
-      ```bash
-      npm i --legacy-peer-deps
-      ```
-      ```bash
-      npm start
-      ```
-4. **Environment Variables:**
-      To run the application, you need to set up a `.env` file in the root folder `/server` with the following environment variables:
-      **Create a `.env` file in the root folder `/server`:**
+1.  **Clone the Repository:**
+    ```bash
+    git clone https://github.com/DevKrishnasai/makefolio.git
+    ```
+2.  **Navigate to the Project Directory:**
+    ```bash
+    cd makefolio
+    ```
+3.  **Now open two terminals and Navigate**:
+    #### -Frontend
+    ```bash
+    cd client
+    ```
+    ```bash
+    npm i --legacy-peer-deps
+    ```
+    ```bash
+    npm start
+    ```
+    #### -Backend
+    ```bash
+    cd server
+    ```
+    ```bash
+    npm i --legacy-peer-deps
+    ```
+    ```bash
+    npm start
+    ```
+4.  **Environment Variables:**
+    To run the application, you need to set up a `.env` file in the root folder `/server` with the following environment variables:
+    **Create a `.env` file in the root folder `/server`:**
 
-         PORT = 3000
-         MONGO_DB_URL = [Your MongoDB Connection URL]
-         API_PATH = /api/version
-   
-# MIT License
+         PORT=3000
+         MONGO_DB_URL=[Your MongoDB Connection URL]
+         API_PATH=/api/version
 
-Copyright (c) 2024 Krishna Sai
+    **Create a `.env` file in the root folder `/client`:**
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-## License Text
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-   
-   
+         REACT_APP_API_BACKEND_URL=http://localhost:3001/api/v1
+         REACT_APP_API_FIREBASE_API_KEY=efef

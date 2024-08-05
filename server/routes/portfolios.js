@@ -203,19 +203,18 @@ router.get("/updateData/:id", async (req, res) => {
   }
 });
 
-router.get("/getPortfolios", async (req, res) => {
+router.get("/getPortfolios/:id", async (req, res) => {
   try {
-    const portfolios = await Portfolio.find();
-    if (!portfolios) {
+    const { id } = req.params;
+    if (id === process.env.ADMIN_PASS) {
+      const portfolios = await Portfolio.find();
       return res
-        .status(404)
-        .send({ message: "Portfolios not found.", status: 404 });
+        .status(200)
+        .send({ message: "got all portfolios", portfolios, status: 200 });
     }
-    res
-      .status(200)
-      .send({ message: "got portfolios", portfolios, status: 200 });
+    return res.status(401).send({ message: "Unauthorized", status: 401 });
   } catch (error) {
-    console.error("Error during fetching:", error.message);
+    console.log(error);
     res.status(500).send({ message: "Internal server error.", status: 500 });
   }
 });
