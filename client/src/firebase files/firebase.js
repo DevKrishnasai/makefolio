@@ -6,7 +6,7 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAg6WsCHKbMd6HRR4ua1kZCaVZ3r8UrTRk",
+  apiKey: process.env.REACT_APP_API_FIREBASE_API_KEY,
   authDomain: "portfolio-maker-faf5d.firebaseapp.com",
   projectId: "portfolio-maker-faf5d",
   storageBucket: "portfolio-maker-faf5d.appspot.com",

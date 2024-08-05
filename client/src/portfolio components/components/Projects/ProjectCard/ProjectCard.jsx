@@ -85,7 +85,7 @@ function ProjectCard({ data }) {
                 <BtnGroup>
                   {list["github_repo_link"].length > 1 && (
                     <a
-                      className="btn SecondaryBtn btn-shadow"
+                      className="btn btn-shadow"
                       href={list["github_repo_link"]}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -100,7 +100,7 @@ function ProjectCard({ data }) {
                   )}
                   {list["github_live_link"].length > 1 && (
                     <a
-                      className="btn PrimaryBtn btn-shadow"
+                      className="btn  btn-shadow"
                       href={list["github_live_link"]}
                       target="_blank"
                       rel="noopener noreferrer"

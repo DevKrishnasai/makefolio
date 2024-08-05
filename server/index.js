@@ -26,7 +26,8 @@ const portfolioRoute = require("./routes/portfolios.js");
 const testRoute = require("./routes/tests.js");
 
 // Routes
-const api = process.env.API;
+const api = process.env.API_PATH;
+console.log(api);
 app.use(`${api}/users`, usersRoute);
 app.use(`${api}/deleteusers`, deleteUserRoute);
 app.use(`${api}/portfolios`, portfolioRoute);

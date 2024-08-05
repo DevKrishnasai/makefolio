@@ -1,64 +1,95 @@
 import styled from "@emotion/styled";
 
 export const Card = styled.div`
-  display: grid;
-  grid-gap: 2rem;
+  display: flex;
+  flex-direction: column;
   margin-bottom: 4rem;
-  grid-template-columns: 1fr;
-  padding-bottom: 1rem;
   overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  @media (min-width: 992px) {
-    grid-template-columns: 1fr 1fr;
-    border-bottom: 0;
-    padding-bottom: 0;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
   }
 `;
 
 export const CardLeft = styled.div`
-  justify-self: center;
-  height: 100%;
+  flex: 1;
+  overflow: hidden;
 
   img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 `;
 
 export const CardRight = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  padding: 2rem;
+  background-color: #ffffff;
 
   h4 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 600;
+    margin-bottom: 1rem;
+    color: #333;
   }
 
   p {
+    font-size: 1rem;
     font-weight: 400;
-    max-width: 95%;
-    margin-top: 10px;
-    margin-bottom: 1rem;
-    color: rgba(0, 0, 0, 0.815);
-    text-align: center;
-
-    @media (min-width: 992px) {
-      text-align: start;
-    }
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
   }
-  @media (min-width: 992px) {
-    align-items: flex-start;
-    margin-top: 1rem;
+
+  @media (max-width: 767px) {
+    align-items: center;
+    text-align: center;
   }
 `;
 
 export const BtnGroup = styled.div`
-  height: 70px;
   display: flex;
-  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+
+  a {
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+
+    &.SecondaryBtn {
+      background-color: black;
+      color: white;
+
+      &:hover {
+        background-color: #e0e0e0;
+      }
+    }
+
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+  }
 `;
 
 export const TechCardContainer = styled.div`
@@ -70,7 +101,6 @@ export const TechCardContainer = styled.div`
     justify-content: flex-start;
   }
 `;
-
 export const TechCard = styled.div`
   border-radius: 10px;
   background-color: #f5f5f5;

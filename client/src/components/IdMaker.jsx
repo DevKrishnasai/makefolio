@@ -38,7 +38,7 @@ const IdMaker = ({
           sx={{ fontWeight: 500 }}
           color={error ? "red" : "black"}
         >
-          https://makfolio.vercel.app/{name}
+          https://makefolio.vercel.app/{name}
         </Typography>
       )}
       {name.length > 0 && error && (

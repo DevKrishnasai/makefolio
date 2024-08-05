@@ -13,7 +13,7 @@ import { storage } from "../firebase files/firebase";
 import styled from "styled-components";
 import HomePart1 from "./HomePart1";
 import Account from "../components/Account";
-import { Edit, Man2 } from "@mui/icons-material";
+import { AccountBox, Edit, Logout, Man2, Person } from "@mui/icons-material";
 
 const Homepage = ({ user, setUser }) => {
   //useState hooks to handle state changes
@@ -184,13 +184,14 @@ const Homepage = ({ user, setUser }) => {
     });
   };
 
-  const id = user["portfolioId"];
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     const getUserByData = async () => {
       // setLoading(true);
+      console.log(user["portfolioId"], "in homepage");
       try {
         const response = await fetch(
-          `https://makfolio-api.onrender.com/api/v1/portfolios/updateData/${id}`
+          `${process.env.REACT_APP_API_BACKEND_URL}/portfolios/updateData/${user["portfolioId"]}`
         );
         const data = await response.json();
 
@@ -223,10 +224,9 @@ const Homepage = ({ user, setUser }) => {
     };
     getUserByData();
     // setLoading(true);
-  }, [id]);
+  }, [user, open]);
 
   //dilog boxes
-  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -236,24 +236,26 @@ const Homepage = ({ user, setUser }) => {
     setOpen(false);
   };
 
-  const handleUpdate = async () => {
+  const handleUpdate = async (id) => {
     try {
-      fetch(`https://makfolio-api.onrender.com/api/v1/users/updateUser`, {
+      fetch(`${process.env.REACT_APP_API_BACKEND_URL}/users/updateUser`, {
         method: "put",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(user),
+        body: JSON.stringify({ ...user, updatedPortfolioId: id }),
       })
         .then((res) => {
           return res.json();
         })
-        .then((data) => {
-          if (data.status === 200) {
+        .then((d) => {
+          console.log(d);
+          if (d.status === 200) {
             setError(false);
             handleClickClose();
-            setUser({ ...user, portfolioId: user["updatedPortfolioId"] });
+            setUser({ ...user, portfolioId: d["_doc"]["portfolioId"] });
+            setData({ ...data, portfolioId: d["_doc"]["portfolioId"] });
           }
         })
         .catch((err) => {
@@ -367,16 +369,25 @@ const Homepage = ({ user, setUser }) => {
       />
       {!hide && (
         <SpeedDial
-          ariaLabel="SpeedDial basic example"
+          ariaLabel="SpeedDial"
           sx={{ position: "fixed", top: 10, right: 10 }}
           icon={<SpeedDialIcon openIcon={<Edit />} />}
           direction="down"
         >
           <SpeedDialAction
             key="account"
-            icon={<Man2 />}
+            icon={<Person />}
             tooltipTitle="account"
             onClick={handleClickOpen}
+          />
+          <SpeedDialAction
+            key="edit"
+            icon={<Logout />}
+            tooltipTitle="edit"
+            onClick={() => {
+              localStorage.removeItem("user");
+              window.location.reload();
+            }}
           />
         </SpeedDial>
       )}

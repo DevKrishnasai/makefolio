@@ -27,7 +27,6 @@ const Register = ({ setUser, toggle, setToggle, user }) => {
   const [terms, setTerms] = useState(false);
   const [error, setError] = useState("");
   const [serverError, setServerError] = useState("");
-
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -47,7 +46,7 @@ const Register = ({ setUser, toggle, setToggle, user }) => {
       setError("confirmPassword");
     } else {
       setIsLoading(true);
-      await fetch("https://makfolio-api.onrender.com/api/v1/users/register", {
+      await fetch(`${process.env.REACT_APP_API_BACKEND_URL}/users/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,12 +54,9 @@ const Register = ({ setUser, toggle, setToggle, user }) => {
         },
         body: JSON.stringify(values),
       })
-        .then((res) => {
-          return res.json();
-        })
+        .then((res) => res.json())
         .then((data) => {
           if (data.status === 201) {
-            // setUser(values);
             setTerms(true);
             setIsLoading(false);
           } else {
@@ -104,7 +100,7 @@ const Register = ({ setUser, toggle, setToggle, user }) => {
           ) : (
             <Stack>
               <form onSubmit={handleSubmit} className="form">
-                <div class="twelve">
+                <div className="twelve">
                   <h1>Register</h1>
                 </div>
                 <TextField
@@ -123,7 +119,7 @@ const Register = ({ setUser, toggle, setToggle, user }) => {
                       </InputAdornment>
                     ),
                   }}
-                  error={error === "name" && true}
+                  error={error === "name"}
                   helperText={error === "name" && "Please enter name"}
                 />
                 <TextField
@@ -142,7 +138,7 @@ const Register = ({ setUser, toggle, setToggle, user }) => {
                       </InputAdornment>
                     ),
                   }}
-                  error={error === "email" && true}
+                  error={error === "email"}
                   helperText={error === "email" && "Please enter a valid email"}
                 />
                 <TextField
@@ -161,10 +157,10 @@ const Register = ({ setUser, toggle, setToggle, user }) => {
                       </InputAdornment>
                     ),
                   }}
-                  error={error === "password" && true}
+                  error={error === "password"}
                   helperText={
                     error === "password" &&
-                    "Please enter password with altleast 6 characters length"
+                    "Please enter password with at least 6 characters length"
                   }
                 />
                 <TextField
@@ -183,14 +179,14 @@ const Register = ({ setUser, toggle, setToggle, user }) => {
                       </InputAdornment>
                     ),
                   }}
-                  error={error === "confirmPassword" && true}
+                  error={error === "confirmPassword"}
                   helperText={
                     error === "confirmPassword" &&
-                    "please check the password your entered!"
+                    "Please check the password you entered!"
                   }
                 />
 
-                <Typography variant="p" color="red">
+                <Typography variant="body1" color="error">
                   {serverError}
                 </Typography>
 
@@ -208,7 +204,7 @@ const Register = ({ setUser, toggle, setToggle, user }) => {
                   Register
                 </Button>
                 <Typography>
-                  Already have a account?
+                  Already have an account?
                   <Button
                     variant="text"
                     sx={{
@@ -219,7 +215,7 @@ const Register = ({ setUser, toggle, setToggle, user }) => {
                         color: "blue",
                       },
                     }}
-                    onClick={(e) => setToggle(!toggle)}
+                    onClick={() => setToggle(!toggle)}
                   >
                     signin
                   </Button>

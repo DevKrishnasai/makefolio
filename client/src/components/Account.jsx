@@ -22,6 +22,7 @@ export default function Account({
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [temp, setTemp] = useState(user["portfolioId"]);
+  const [spaceErr, setSpaceErr] = useState(false);
 
   const checkId = async () => {
     setLoading(true);
@@ -30,7 +31,7 @@ export default function Account({
       setError(true);
     } else {
       await fetch(
-        `https://makfolio-api.onrender.com/api/v1/portfolios/checkId/${temp}`,
+        `${process.env.REACT_APP_API_BACKEND_URL}/portfolios/checkId/${temp}`,
         {
           method: "get",
           headers: {
@@ -111,21 +112,30 @@ export default function Account({
             }}
           >
             <TextField
+              label="Portfolio Id"
               placeholder="Enter a unique name"
               onChange={(e) => {
                 setTemp(e.target.value);
                 setError(false);
+                if (e.target.value.includes(" ")) {
+                  setSpaceErr(true);
+                } else {
+                  setSpaceErr(false);
+                }
               }}
               disabled={id && "true"}
               value={temp}
             />
+            {spaceErr && (
+              <Typography color="red">Id should not contain spaces</Typography>
+            )}
             {temp.length > 0 && (
               <Typography
                 variant="body1"
                 sx={{ fontWeight: 500, ml: "10px" }}
                 color={error ? "red" : "black"}
               >
-                https://makfolio.vercel.app/{temp}
+                https://makefolio.vercel.app/{temp}
               </Typography>
             )}
             {temp.length > 0 && error && (
@@ -138,7 +148,7 @@ export default function Account({
                 please enter a name with atleast 3 characters
               </Typography>
             )}
-            {temp !== user["portfolioId"] && (
+            {temp !== user["portfolioId"] && !spaceErr && (
               <Button
                 variant="contained"
                 onClick={checkId}
@@ -157,7 +167,7 @@ export default function Account({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClickClose}>Cancel</Button>
-          <Button onClick={handleUpdate}>Update</Button>
+          <Button onClick={() => handleUpdate(temp)}>Update</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

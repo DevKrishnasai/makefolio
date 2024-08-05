@@ -17,7 +17,7 @@ function Home() {
     const getUserById = async () => {
       try {
         const response = await fetch(
-          `https://makfolio-api.onrender.com/api/v1/portfolios/portfolio/${id}`
+          `${process.env.REACT_APP_API_BACKEND_URL}/portfolios/portfolio/${id}`
         );
         const data = await response.json();
         console.log(data);

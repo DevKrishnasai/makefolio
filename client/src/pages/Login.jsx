@@ -18,7 +18,6 @@ const Login = ({ setUser, toggle, setToggle, user }) => {
 
   const [error, setError] = useState("");
   const [serverError, setServerError] = useState("");
-
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -32,7 +31,7 @@ const Login = ({ setUser, toggle, setToggle, user }) => {
       setError("password");
     } else {
       setIsLoading(true);
-      await fetch("https://makfolio-api.onrender.com/api/v1/users/login", {
+      await fetch(`${process.env.REACT_APP_API_BACKEND_URL}/users/login`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -40,12 +39,12 @@ const Login = ({ setUser, toggle, setToggle, user }) => {
         },
         body: JSON.stringify(values),
       })
-        .then((res) => {
-          return res.json();
-        })
+        .then((res) => res.json())
         .then((data) => {
           if (data.status === 200) {
-            setUser({ ...values, portfolioId: data["portfolioId"] });
+            const userData = { ...values, portfolioId: data["portfolioId"] };
+            setUser(userData);
+            localStorage.setItem("user", JSON.stringify(userData));
             setIsLoading(false);
           } else {
             setServerError(data.message);
@@ -78,7 +77,7 @@ const Login = ({ setUser, toggle, setToggle, user }) => {
       ) : (
         <Stack>
           <form onSubmit={handleSubmit} className="form">
-            <div class="twelve">
+            <div className="twelve">
               <h1>Login</h1>
             </div>
             <TextField
@@ -97,7 +96,7 @@ const Login = ({ setUser, toggle, setToggle, user }) => {
                   </InputAdornment>
                 ),
               }}
-              error={error === "email" && true}
+              error={error === "email"}
               helperText={error === "email" && "Please enter a valid email"}
             />
             <TextField
@@ -116,13 +115,13 @@ const Login = ({ setUser, toggle, setToggle, user }) => {
                   </InputAdornment>
                 ),
               }}
-              error={error === "password" && true}
+              error={error === "password"}
               helperText={
                 error === "password" &&
-                "Please enter password with altleast 6 characters length"
+                "Please enter password with at least 6 characters length"
               }
             />
-            <Typography variant="p" color="red">
+            <Typography variant="body1" color="error">
               {serverError}
             </Typography>
 
@@ -140,7 +139,7 @@ const Login = ({ setUser, toggle, setToggle, user }) => {
               Login
             </Button>
             <Typography>
-              Dont't have an account?
+              Don't have an account?
               <Button
                 variant="text"
                 sx={{
@@ -151,7 +150,7 @@ const Login = ({ setUser, toggle, setToggle, user }) => {
                     color: "blue",
                   },
                 }}
-                onClick={(e) => setToggle(!toggle)}
+                onClick={() => setToggle(!toggle)}
               >
                 signup
               </Button>

@@ -3,17 +3,18 @@ import { Link as LinkScroll } from "react-scroll";
 
 export const HeroWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 90%;
+  max-width: 1200px;
   height: calc(100vh - 150px);
   margin: 0 auto;
 
   @media screen and (max-width: 900px) {
     width: 100%;
-    height: 100%;
+    height: auto;
     flex-direction: column;
+    padding: 2rem 1rem;
   }
 `;
 
@@ -21,45 +22,36 @@ export const HeroLeft = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding-right: 1rem;
-  width: 100%;
+  align-items: flex-start;
+  padding-right: 2rem;
 
-  h1 {
+  h1,
+  h2 {
     font-size: 2.3rem;
     color: #f6f6f6;
     font-weight: 500;
     margin-bottom: 0.3rem;
   }
-  h2 {
-    font-size: 2.1rem;
-    color: #f6f6f6;
-    font-weight: 500;
-    margin-bottom: 1.4rem;
-  }
 
   h5 {
     font-size: 1.3rem;
     color: #fff;
+    margin-top: 1rem;
   }
 
   @media screen and (max-width: 900px) {
-    flex: 1;
     width: 100%;
     text-align: center;
+    align-items: center;
     padding-right: 0;
+
     h1,
     h2 {
-      font-size: 1.5rem;
-      color: #f6f6f6;
-      font-weight: 500;
+      font-size: 1.8rem;
     }
 
     h5 {
-      margin-top: 20px;
-      font-size: 1rem;
-      font-weight: 500;
-      color: #fff;
+      font-size: 1.1rem;
     }
   }
 `;
@@ -67,27 +59,26 @@ export const HeroLeft = styled.div`
 export const HeroRight = styled.div`
   flex: 1;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
-  padding-left: 3rem;
-  margin: 3rem;
+  align-items: center;
+  max-width: 500px;
+
   @media screen and (max-width: 900px) {
-    margin: 0px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    width: 100%;
+    margin-top: 2rem;
   }
 `;
 
 export const Image = styled.img`
-  max-width: 90%;
-  height: 100%;
-  border-radius: 40px;
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Shadow effect */
   @media screen and (max-width: 900px) {
-    width: 100%;
-    height: 100%;
+    max-height: 50vh;
   }
 `;
 
@@ -105,15 +96,15 @@ const ScrollAnimation = keyframes`
 
 export const ScrollDown = styled(LinkScroll)`
   display: flex;
-  flex-direction: row;
   justify-content: center;
+  align-items: center;
   cursor: pointer;
   position: absolute;
+  // left: 20%;
   margin-top: 40px;
-
-  align-items: flex-start;
-
+  transform: translateX(-50%);
   animation: ${ScrollAnimation} 2s linear 0s infinite;
+
   @media screen and (max-width: 992px) {
     display: none;
   }
@@ -125,7 +116,7 @@ export const ScrollLink = styled.div`
   font-size: 1.3rem;
   color: #f6f6f6;
 
-  img {
+  svg {
     height: 35px;
     width: 35px;
     margin-left: 6px;

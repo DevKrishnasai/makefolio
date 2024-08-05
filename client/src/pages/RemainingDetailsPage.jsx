@@ -9,7 +9,13 @@ import {
   Typography,
 } from "@mui/material";
 import { Box, Card, CardContent } from "@mui/joy";
-import { Add, Delete, GitHub, LinkedIn } from "@mui/icons-material";
+import {
+  Add,
+  CreateNewFolder,
+  Delete,
+  GitHub,
+  LinkedIn,
+} from "@mui/icons-material";
 import { AspectRatio } from "@mui/joy";
 
 const RemainingDetailsPage = ({
@@ -62,7 +68,7 @@ const RemainingDetailsPage = ({
 
     try {
       const response = await fetch(
-        "https://makfolio-api.onrender.com/api/v1/portfolios/portfoliodata",
+        `${process.env.REACT_APP_API_BACKEND_URL}/portfolios/portfoliodata`,
         {
           method: "PUT",
           headers: {
@@ -303,7 +309,7 @@ const RemainingDetailsPage = ({
                 },
               }}
             >
-              <Add />
+              <CreateNewFolder />
             </Fab>
           </>
         )
@@ -352,7 +358,7 @@ const RemainingDetailsPage = ({
             }}
           >
             <a
-              href={`https://makfolio.vercel.app/${user["portfolioId"]}`}
+              href={`https://makefolio.vercel.app/${user["portfolioId"]}`}
               target="_blank"
               rel="noreferrer"
               style={{
@@ -360,7 +366,7 @@ const RemainingDetailsPage = ({
                 fontSize: "20px",
               }}
             >
-              {`https://makfolio.vercel.app/${user["portfolioId"]}`}
+              {`https://makefolio.vercel.app/${user["portfolioId"]}`}
             </a>
           </Typography>
           <Box>

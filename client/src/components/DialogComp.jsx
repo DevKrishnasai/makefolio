@@ -33,7 +33,7 @@ export default function DialogComp({
   const handleClose = async () => {
     try {
       await fetch(
-        "https://makfolio-api.onrender.com/api/v1/deleteusers/deleteUser",
+        `${process.env.REACT_APP_API_BACKEND_URL}/deleteusers/deleteUser`,
         {
           method: "post",
           headers: {

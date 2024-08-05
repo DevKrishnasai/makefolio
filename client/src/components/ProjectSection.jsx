@@ -182,7 +182,7 @@ const ProjectSection = ({
               uploadImage(e.target.files[0]);
             }}
           >
-            Upload file
+            Upload image
             <VisuallyHiddenInput type="file" />
           </Btn>
         </Box>

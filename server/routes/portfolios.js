@@ -203,4 +203,21 @@ router.get("/updateData/:id", async (req, res) => {
   }
 });
 
+router.get("/getPortfolios", async (req, res) => {
+  try {
+    const portfolios = await Portfolio.find();
+    if (!portfolios) {
+      return res
+        .status(404)
+        .send({ message: "Portfolios not found.", status: 404 });
+    }
+    res
+      .status(200)
+      .send({ message: "got portfolios", portfolios, status: 200 });
+  } catch (error) {
+    console.error("Error during fetching:", error.message);
+    res.status(500).send({ message: "Internal server error.", status: 500 });
+  }
+});
+
 module.exports = router;

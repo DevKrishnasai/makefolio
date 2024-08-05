@@ -40,6 +40,7 @@ router.post("/register", async (req, res) => {
       name,
       email,
       password,
+      portfolioId: name + Math.floor(Math.random() * 1000),
     });
     await newUser.save();
     res
@@ -54,6 +55,7 @@ router.post("/register", async (req, res) => {
 router.put("/updateUser", async (req, res) => {
   try {
     const { updatedPortfolioId, email, password, portfolioId } = req.body;
+    console.log("updateUser", req.body);
 
     const user = await User.findOne({ portfolioId });
     let portfolio = await Portfolio.findOne({ portfolioId });
@@ -87,16 +89,33 @@ router.put("/updateUser", async (req, res) => {
 
     user.email = email;
     user.password = password;
-    user.portfolioId = updatedPortfolioId;
+    if (updatedPortfolioId) {
+      user.portfolioId = updatedPortfolioId;
+      portfolio.portfolioId = updatedPortfolioId;
+    }
     await user.save();
-    portfolio.portfolioId = updatedPortfolioId;
     await portfolio.save();
 
-    res
-      .status(200)
-      .send({ message: "Accounts updated successfully.", status: 200 });
+    res.status(200).send({
+      message: "Accounts updated successfully.",
+      status: 200,
+      ...user,
+    });
   } catch (error) {
     console.error("Error registering user:", error.message);
+    res.status(500).send({ message: "Internal server error.", status: 500 });
+  }
+});
+
+router.get("/getUsers", async (req, res) => {
+  try {
+    const users = await User.find({});
+    console.log("Users fetched successfully:", users);
+    res
+      .status(200)
+      .send({ message: "Users fetched successfully.", status: 200, users });
+  } catch (error) {
+    console.error("Error getting users:", error.message);
     res.status(500).send({ message: "Internal server error.", status: 500 });
   }
 });

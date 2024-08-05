@@ -71,7 +71,7 @@ export default function Intropage({
       setError(true);
     } else {
       await fetch(
-        "https://makfolio-api.onrender.com/api/v1/portfolios/checkId",
+        `${process.env.REACT_APP_API_BACKEND_URL}/portfolios/checkId`,
         {
           method: "post",
           headers: {
@@ -107,7 +107,7 @@ export default function Intropage({
 
   const handleCopy = () => {
     navigator.clipboard
-      .writeText(`https://makfolio.vercel.app/${name}`)
+      .writeText(`https://makefolio.vercel.app/${name}`)
       .then(() => {
         setCopied(true);
         setTimeout(() => {
@@ -173,12 +173,12 @@ export default function Intropage({
                         This is how the portfolio looks like
                         <br />
                         <a
-                          href="https://devkrishnasai.vercel.app/"
+                          href="https://krishnasai.top/"
                           target="_blank"
                           rel="noopener noreferrer"
                           style={{ textDecoration: "none", color: "blue" }}
                         >
-                          https://devkrishnasai.vercel.app/
+                          https://krishnasai.top/
                         </a>
                       </Typography>
                     )}
@@ -207,7 +207,7 @@ export default function Intropage({
                           }}
                         >
                           <Typography variant="body1">
-                            https://makfolio.vercel.app/{name}
+                            https://makefolio.vercel.app/{name}
                           </Typography>
                         </Card>
 
