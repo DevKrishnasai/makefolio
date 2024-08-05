@@ -33,6 +33,8 @@ app.use(`${api}/deleteusers`, deleteUserRoute);
 app.use(`${api}/portfolios`, portfolioRoute);
 app.use(`${api}/tests`, testRoute);
 
+console.log(process.env.MONGO_DB_URL, "mongo db url");
+
 // Connecting to the database
 mongoose
   .connect(process.env.MONGO_DB_URL, {
