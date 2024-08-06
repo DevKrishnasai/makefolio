@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const cron = require("node-cron");
+const axios = require("axios");
 const app = express();
 require("dotenv/config");
 
@@ -18,6 +20,18 @@ app.use((err, req, res, next) => {
     message: "Internal server error.",
     status: 500,
   });
+});
+
+cron.schedule("*/1 * * * *", async () => {
+  try {
+    // const response = await axios.get(
+    //   `http://localhost:${process.env.PORT || 5000}`
+    // );
+    const response = await axios.get(process.env.URL);
+    console.log("Server pinged successfully:", response.data);
+  } catch (error) {
+    console.error("Error pinging server:", error.message);
+  }
 });
 
 const usersRoute = require("./routes/users.js");
