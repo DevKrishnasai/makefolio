@@ -13,7 +13,7 @@ import { storage } from "../firebase files/firebase";
 import styled from "styled-components";
 import HomePart1 from "./HomePart1";
 import Account from "../components/Account";
-import { AccountBox, Edit, Logout, Man2, Person } from "@mui/icons-material";
+import { Edit, Logout, Person } from "@mui/icons-material";
 
 const Homepage = ({ user, setUser }) => {
   //useState hooks to handle state changes
@@ -381,9 +381,9 @@ const Homepage = ({ user, setUser }) => {
             onClick={handleClickOpen}
           />
           <SpeedDialAction
-            key="edit"
+            key="logout"
             icon={<Logout />}
-            tooltipTitle="edit"
+            tooltipTitle="logout"
             onClick={() => {
               localStorage.removeItem("user");
               window.location.reload();

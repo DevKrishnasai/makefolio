@@ -8,7 +8,12 @@ import {
   Typography,
 } from "@mui/material";
 import { Button as Btn } from "@mui/joy";
-import { EmailRounded, PasswordRounded } from "@mui/icons-material";
+import {
+  EmailRounded,
+  GitHub,
+  LinkedIn,
+  PasswordRounded,
+} from "@mui/icons-material";
 
 const Login = ({ setUser, toggle, setToggle, user }) => {
   const [values, setValues] = useState({
@@ -70,6 +75,32 @@ const Login = ({ setUser, toggle, setToggle, user }) => {
       alignItems="center"
       height="100vh"
     >
+      <div className="bottom-center">
+        <a
+          href="https://www.linkedin.com/in/krishnasaiambati/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <LinkedIn
+            sx={{
+              fontSize: 40,
+              color: "blue",
+              ":hover": {
+                scale: 10,
+                cursor: "pointer",
+              },
+              marginRight: "5px",
+            }}
+          />
+        </a>
+        <a
+          href="https://github.com/DevKrishnasai/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <GitHub sx={{ fontSize: 40 }} />
+        </a>
+      </div>
       {isLoading ? (
         <Btn loading variant="plain" sx={{ height: "50px" }}>
           loading...

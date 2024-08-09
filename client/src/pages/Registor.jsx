@@ -10,6 +10,8 @@ import {
 import { Button as Btn } from "@mui/joy";
 import {
   EmailRounded,
+  GitHub,
+  LinkedIn,
   Man2,
   PasswordRounded,
   PasswordTwoTone,
@@ -77,6 +79,32 @@ const Register = ({ setUser, toggle, setToggle, user }) => {
 
   return (
     <div>
+      <div className="bottom-center">
+        <a
+          href="https://www.linkedin.com/in/krishnasaiambati/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <LinkedIn
+            sx={{
+              fontSize: 40,
+              color: "blue",
+              ":hover": {
+                scale: 10,
+                cursor: "pointer",
+              },
+              marginRight: "5px",
+            }}
+          />
+        </a>
+        <a
+          href="https://github.com/DevKrishnasai/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <GitHub sx={{ fontSize: 40 }} />
+        </a>
+      </div>
       {terms ? (
         <Intropage
           setUser={setUser}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Login from "../pages/Login";
 import Register from "../pages/Registor";
 import Homepage from "../pages/Homepage";
+import { GitHub, LinkedIn } from "@mui/icons-material";
 
 const Authenticate = () => {
   const [toggle, setToggle] = useState(true);

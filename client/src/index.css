@@ -310,3 +310,10 @@ ul {
   /* margin: 1.5em auto; */
   /* border: 3px solid rgba(0, 0, 0, 0.08); */
 }
+
+.bottom-center {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
