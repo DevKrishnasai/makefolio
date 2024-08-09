@@ -13,7 +13,7 @@ import { storage } from "../firebase files/firebase";
 import styled from "styled-components";
 import HomePart1 from "./HomePart1";
 import Account from "../components/Account";
-import { Edit, Logout, Person } from "@mui/icons-material";
+import { Edit, Logout, Person, Settings } from "@mui/icons-material";
 
 const Homepage = ({ user, setUser }) => {
   //useState hooks to handle state changes
@@ -52,6 +52,7 @@ const Homepage = ({ user, setUser }) => {
     },
     portfolioId: user["portfolioId"],
     hero_url: "",
+    resume_url: "",
   });
 
   //styles
@@ -144,6 +145,8 @@ const Homepage = ({ user, setUser }) => {
       setError("techs");
     } else if (data["tools"].length === 0) {
       setError("tools");
+    } else if (data["resume_url"] === "") {
+      setError("resume_url");
     } else if (data["links"]["github"] === "") {
       setError("github");
     } else if (data["links"]["linkedin"] === "") {
@@ -201,8 +204,8 @@ const Homepage = ({ user, setUser }) => {
           setData({
             logoName: "",
             fullName: "",
-            email: "",
-            about: "",
+            email: user["email"],
+            about: `I'm <i>${user["name"]}</i> and I'm a <b>software developer</b> <br> I'm passionate about <b>web development</b> and <b>machine learning</b>`,
             tags: [],
             techs: [],
             tools: [],
@@ -214,6 +217,7 @@ const Homepage = ({ user, setUser }) => {
             },
             portfolioId: user["portfolioId"],
             hero_url: "",
+            resume_url: "",
           });
         }
 
@@ -371,7 +375,7 @@ const Homepage = ({ user, setUser }) => {
         <SpeedDial
           ariaLabel="SpeedDial"
           sx={{ position: "fixed", top: 10, right: 10 }}
-          icon={<SpeedDialIcon openIcon={<Edit />} />}
+          icon={<Settings openIcon={<Edit />} />}
           direction="down"
         >
           <SpeedDialAction

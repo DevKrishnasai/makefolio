@@ -61,6 +61,7 @@ router.post("/portfoliodata", async (req, res) => {
       links,
       portfolioId,
       hero_url,
+      resume_url,
     } = req.body;
 
     const newPortfolio = Portfolio({
@@ -79,6 +80,7 @@ router.post("/portfoliodata", async (req, res) => {
       },
       portfolioId,
       hero_url,
+      resume_url,
     });
     await newPortfolio.save();
     res
@@ -104,7 +106,10 @@ router.put("/portfoliodata", async (req, res) => {
       links,
       portfolioId,
       hero_url,
+      resume_url,
     } = req.body;
+
+    console.log(req.body);
 
     // const updatedPortfolio = await Portfolio.findOneAndUpdate(
     //   { portfolioId: portfolioId },
@@ -134,6 +139,7 @@ router.put("/portfoliodata", async (req, res) => {
         },
         portfolioId,
         hero_url,
+        resume_url,
       });
       await newPortfolio.save();
       return res
@@ -151,6 +157,7 @@ router.put("/portfoliodata", async (req, res) => {
     updatedPortfolio.projects = projects;
     updatedPortfolio.links = links;
     updatedPortfolio.hero_url = hero_url;
+    updatedPortfolio.resume_url = resume_url;
 
     await updatedPortfolio.save();
 
@@ -178,6 +185,7 @@ router.get("/portfolio/:id", async (req, res) => {
         .status(404)
         .send({ message: "Portfolio not found.", status: 404 });
     }
+    console.log("%%%%%%%", user);
     res.status(200).send({ message: "found portfolio", user, status: 200 });
   } catch (error) {
     console.error("Error during fetching:", error.message);

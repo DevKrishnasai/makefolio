@@ -34,6 +34,29 @@ export const NavLink = styled(ScrollLink)`
     outline: none;
   }
 `;
+export const ResumeLink = styled.a`
+  color: white;
+  display: flex;
+  font-size: 1.2rem;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+  margin-left: 24px;
+  transition: all 0.3s ease-in-out; /* Changed 'transitions' to 'transition' and set to 'all' for a more comprehensive transition effect */
+
+  &:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+    padding: 10px;
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    border-radius: 20px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+`;
 export const Logo = styled("div")`
   cursor: pointer;
 `;

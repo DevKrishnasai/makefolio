@@ -6,13 +6,19 @@ import {
   Fab,
   IconButton,
   Paper,
+  SpeedDial,
+  SpeedDialAction,
+  SpeedDialIcon,
   Typography,
 } from "@mui/material";
 import { Box, Card, CardContent } from "@mui/joy";
 import {
   Add,
+  AddHome,
   CreateNewFolder,
+  CreateRounded,
   Delete,
+  FireExtinguisherSharp,
   GitHub,
   LinkedIn,
 } from "@mui/icons-material";
@@ -67,6 +73,7 @@ const RemainingDetailsPage = ({
     }
 
     try {
+      console.log("-----_>", data);
       const response = await fetch(
         `${process.env.REACT_APP_API_BACKEND_URL}/portfolios/portfoliodata`,
         {
@@ -290,13 +297,25 @@ const RemainingDetailsPage = ({
                 Done
               </Button>
             </Box>
-            <Fab
+            <SpeedDial
+              ariaLabel="SpeedDial"
+              sx={{ position: "fixed", bottom: 10, right: 10 }}
+              icon={<SpeedDialIcon openIcon={<AddHome />} />}
+              direction="up"
+            >
+              <SpeedDialAction
+                key="Add Project"
+                icon={<CreateRounded />}
+                tooltipTitle="Add Project"
+                onClick={(e) => {
+                  setError(false);
+                  handleClickOpen();
+                }}
+              />
+            </SpeedDial>
+            {/* <Fab
               color="primary"
               aria-label="add"
-              onClick={(e) => {
-                setError(false);
-                handleClickOpen();
-              }}
               sx={{
                 position: "fixed",
                 bottom: {
@@ -310,7 +329,7 @@ const RemainingDetailsPage = ({
               }}
             >
               <CreateNewFolder />
-            </Fab>
+            </Fab> */}
           </>
         )
       )}

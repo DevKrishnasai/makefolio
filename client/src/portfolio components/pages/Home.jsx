@@ -8,11 +8,11 @@ import ScrollToTop from "../components/SocialIcon/ScrollToTop";
 import { useParams } from "react-router-dom";
 import "../index.css";
 import NoPage from "./NoPage";
+import All from "./All";
 
 function Home() {
   const { id } = useParams();
   const [userData, setUserData] = useState(null);
-
   useEffect(() => {
     const getUserById = async () => {
       try {
@@ -37,6 +37,11 @@ function Home() {
     setLoading(true);
   }, [id]);
   const [loading, setLoading] = useState(false);
+
+  if (id === "all") {
+    return <All />;
+  }
+
   return (
     <>
       {userData === null ? (

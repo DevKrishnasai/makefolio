@@ -39,11 +39,7 @@ function About({ data }) {
             <br />
             <Technologies>
               {data["techs"].map((stack, index) => (
-                <ScrollAnimation
-                  animateIn="bounceInLeft"
-                  animateOnce
-                  key={stack.key}
-                >
+                <ScrollAnimation animateIn="bounceInLeft" key={stack.key}>
                   <Tech className="tech">
                     {/* <TechImg src={stack.img} alt={stack.name} /> */}
                     <TechCard>{stack.value}</TechCard>
@@ -58,11 +54,7 @@ function About({ data }) {
             <br />
             <Technologies>
               {data["tools"].map((tool, index) => (
-                <ScrollAnimation
-                  animateIn="bounceInLeft"
-                  animateOnce
-                  key={tool.key}
-                >
+                <ScrollAnimation animateIn="bounceInRight" key={tool.key}>
                   <Tech key={index} className="tech">
                     {/* <TechImg src={stack.img} alt={stack.name} /> */}
                     <TechCard>{tool.value}</TechCard>

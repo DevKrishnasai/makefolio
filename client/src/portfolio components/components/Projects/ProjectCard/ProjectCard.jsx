@@ -33,6 +33,7 @@ function ProjectCard({ data }) {
                   ))}
                 </TechCardContainer>
                 <BtnGroup>
+                  {}
                   {list["github_repo_link"].length > 1 && (
                     <a
                       className="btn SecondaryBtn btn-shadow"

@@ -102,6 +102,8 @@ export const ScrollDown = styled(LinkScroll)`
   position: absolute;
   // left: 20%;
   margin-top: 40px;
+  width: full;
+  min-width: 150px;
   transform: translateX(-50%);
   animation: ${ScrollAnimation} 2s linear 0s infinite;
 

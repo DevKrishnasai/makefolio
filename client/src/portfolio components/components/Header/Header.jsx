@@ -1,7 +1,15 @@
 import React from "react";
-import { Nav, Logo, NavLink, Bars, NavMenu } from "./HeaderElements";
+import {
+  Nav,
+  Logo,
+  NavLink,
+  Bars,
+  NavMenu,
+  ResumeLink,
+} from "./HeaderElements";
 
-const Header = ({ toggle, logo }) => {
+const Header = ({ toggle, logo, data }) => {
+  console.log(data);
   return (
     <div className="Container" style={{ padding: 0 }}>
       <Nav style={{ zIndex: "88" }}>
@@ -24,8 +32,10 @@ const Header = ({ toggle, logo }) => {
           <NavLink className="menu-item" to="contact">
             Contact
           </NavLink>
+          <ResumeLink href={data["resume_url"]} target="_blank">
+            Resume
+          </ResumeLink>
         </NavMenu>
-
         <Bars onClick={toggle} />
       </Nav>
     </div>

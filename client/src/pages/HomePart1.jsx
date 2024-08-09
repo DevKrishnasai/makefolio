@@ -1,6 +1,7 @@
 import {
   AccountCircle,
   AddPhotoAlternate,
+  AddToDrive,
   ConstructionRounded,
   EmailRounded,
   GitHub,
@@ -74,11 +75,13 @@ const HomePart1 = ({
         setNext(next + 1);
       }
     } else {
-      if (data["links"]["github"].length < 1) {
+      if (data["resume_url"] === "") {
+        setError("resume_url");
+      } else if (data["links"]["github"].length === 0) {
         setError("github");
-      } else if (data["links"]["linkedin"].length < 1) {
+      } else if (data["links"]["linkedin"].length === 0) {
         setError("linkedin");
-      } else if (data["links"]["instagram"].length < 1) {
+      } else if (data["links"]["instagram"].length === 0) {
         setError("instagram");
       } else if (data["hero_url"] === "") {
         setError("hero_url");
@@ -127,7 +130,7 @@ const HomePart1 = ({
         >
           <TextField
             type="text"
-            label="Enter logo name"
+            label="logo (ex: Krishna)"
             sx={{
               ...textBoxSX,
 
@@ -174,7 +177,7 @@ const HomePart1 = ({
               ),
             }}
             error={error === "fullName" && true}
-            helperText={error === "fullName" && "Please enter a full name"}
+            helperText={error === "fullName" && "Please enter full name"}
             value={data["fullName"]}
           />
         </Stack>
@@ -200,7 +203,7 @@ const HomePart1 = ({
           value={data["email"]}
         />
         <TextField
-          label="Enter tags (ex: React Developer )(You can add many tags) "
+          label="Enter tags (e.g. I'm React Developer )(You can add many tags) "
           onChange={(e) => {
             setTagsController(e.target.value);
             setError("");
@@ -218,9 +221,15 @@ const HomePart1 = ({
           error={error === "tags" && true}
           helperText={
             error === "tags" &&
-            "Please enter atleast one tag and press Enter Key"
+            "Please enter atleast one tag and press Enter Key to add to the list"
           }
         />
+        {data["tags"].length === 0 && (
+          <span className="small-text">
+            Note : You can add many tags by pressing 'Enter Key' after each tag
+            ( This will be in the typing effect in the portfolio)
+          </span>
+        )}
         <ul>
           {data["tags"].map((data) => {
             return (
@@ -248,8 +257,14 @@ const HomePart1 = ({
           }
           value={data["about"]}
         />
+        {data["about"].length === 0 && (
+          <span className="small-text">
+            Note : You can use html tags to decorate the text like b,i,small...
+          </span>
+        )}
+        <div dangerouslySetInnerHTML={{ __html: data["about"] }} />
         <TextField
-          label="Enter technologies (Like HTML,CSS,JS.... make sure to instert one by one)"
+          label="Enter technologies (e.g. HTML)"
           onChange={(e) => {
             setTechsController(e.target.value);
             setError("");
@@ -270,6 +285,12 @@ const HomePart1 = ({
             "Please enter atleast one tech and press Enter Key"
           }
         />
+        {data["techs"].length === 0 && (
+          <span className="small-text">
+            Note : You can add many techs by pressing 'Enter Key' after each
+            tech
+          </span>
+        )}
         <ul>
           {data["techs"].map((data) => {
             return (
@@ -284,7 +305,7 @@ const HomePart1 = ({
         </ul>
         <TextField
           sx={{ ...textBoxSX, width: "100%" }}
-          label="Enter tools (Like VS Code, Android Studio, Postman....)"
+          label="Enter tools (e.g. VS Code)"
           onChange={(e) => {
             setToolsController(e.target.value);
             setError("");
@@ -304,6 +325,12 @@ const HomePart1 = ({
             "Please enter atleast one tool and press Enter Key"
           }
         />
+        {data["tools"].length === 0 && (
+          <span className="small-text">
+            Note : You can add many tools by pressing 'Enter Key' after each
+            tool
+          </span>
+        )}
 
         <ul>
           {data["tools"].map((data) => {
@@ -317,6 +344,26 @@ const HomePart1 = ({
             );
           })}
         </ul>
+        <TextField
+          label="Paste your resume drive link"
+          sx={{ ...textBoxSX, width: "100%" }}
+          onChange={(e) => {
+            setData({ ...data, resume_url: e.target.value });
+            setError("");
+          }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="start">
+                <AddToDrive />
+              </InputAdornment>
+            ),
+          }}
+          error={error === "resume_url" && true}
+          helperText={
+            error === "resume_url" && "Please enter a valid drive link"
+          }
+          value={data["resume_url"]}
+        />
         <TextField
           label="Github Link"
           sx={{ ...textBoxSX }}
@@ -336,7 +383,10 @@ const HomePart1 = ({
             ),
           }}
           error={error === "github" && true}
-          helperText={error === "github" && "Please paste the github link"}
+          helperText={
+            error === "github" &&
+            "Please paste the github link else paste github.com or keep #"
+          }
           value={data["links"]["github"]}
         />
         <TextField
@@ -358,7 +408,10 @@ const HomePart1 = ({
             ),
           }}
           error={error === "linkedin" && true}
-          helperText={error === "linkedin" && "Please paste the linkedin link"}
+          helperText={
+            error === "linkedin" &&
+            "Please paste the linkedin link else paste linkedin.com or keep #"
+          }
           value={data["links"]["linkedin"]}
         />
         <TextField
@@ -381,7 +434,8 @@ const HomePart1 = ({
           }}
           error={error === "instagram" && true}
           helperText={
-            error === "instagram" && "Please paste the instagram link"
+            error === "instagram" &&
+            "Please paste the instagram link else paste instagram.com or keep #"
           }
           value={data["links"]["instagram"]}
         />
@@ -563,6 +617,13 @@ const HomePart1 = ({
               }
               value={data["about"]}
             />
+            {data["about"].length === 0 && (
+              <span className="small-text">
+                Note : You can use html tags to decorate the text like
+                b,i,small...
+              </span>
+            )}
+            <div dangerouslySetInnerHTML={{ __html: data["about"] }} />
             <TextField
               label="Enter tags (ex: React Developer )(You can add many tags)"
               onChange={(e) => {
@@ -585,6 +646,12 @@ const HomePart1 = ({
                 "Please enter atleast one tag and press Enter Key"
               }
             />
+            {data["tags"].length === 0 && (
+              <span className="small-text">
+                Note : You can add many tags by pressing 'Enter Key' after each
+                tag (This will be in the typing effect in the portfolio)
+              </span>
+            )}
             <ul>
               {data["tags"].map((data) => {
                 return (
@@ -663,7 +730,12 @@ const HomePart1 = ({
                 "Please enter atleast one tool and press Enter Key"
               }
             />
-
+            {data["tools"].length === 0 && (
+              <span className="small-text">
+                Note : You can add many tools by pressing 'Enter Key' after each
+                tool
+              </span>
+            )}
             <ul>
               {data["tools"].map((data) => {
                 return (
@@ -680,6 +752,26 @@ const HomePart1 = ({
         )}
         {next === 5 && (
           <>
+            <TextField
+              label="Paste your resume drive link"
+              sx={{ ...textBoxSX, width: "100%" }}
+              onChange={(e) => {
+                setData({ ...data, resume_url: e.target.value });
+                setError("");
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="start">
+                    <AddToDrive />
+                  </InputAdornment>
+                ),
+              }}
+              error={error === "resume_url" && true}
+              helperText={
+                error === "resume_url" && "Please enter a valid drive link"
+              }
+              value={data["resume_url"]}
+            />
             <TextField
               label="Github Link"
               sx={{ ...textBoxSX }}
@@ -699,7 +791,9 @@ const HomePart1 = ({
                 ),
               }}
               error={error === "github" && true}
-              helperText={error === "github" && "Please paste the github link"}
+              helperText={
+                error === "github" && "Please paste the github link or keep #"
+              }
               value={data["links"]["github"]}
             />
             <TextField
@@ -722,7 +816,8 @@ const HomePart1 = ({
               }}
               error={error === "linkedin" && true}
               helperText={
-                error === "linkedin" && "Please paste the linkedin link"
+                error === "linkedin" &&
+                "Please paste the linkedin link or keep #"
               }
               value={data["links"]["linkedin"]}
             />
@@ -746,7 +841,8 @@ const HomePart1 = ({
               }}
               error={error === "instagram" && true}
               helperText={
-                error === "instagram" && "Please paste the instagram link"
+                error === "instagram" &&
+                "Please paste the instagram link or keep #"
               }
               value={data["links"]["instagram"]}
             />

@@ -47,6 +47,7 @@ const portfolioSchema = new mongoose.Schema({
     require: true,
   },
   hero_url: String,
+  resume_url: String,
 });
 
 module.exports = mongoose.model("Portfolios", portfolioSchema);

@@ -49,6 +49,9 @@ const IdMaker = ({
           please enter a name with atleast 3 characters
         </Typography>
       )}
+      {name.includes(" ") && (
+        <Typography color="red">please enter a name without spaces</Typography>
+      )}
       <Button variant="contained" onClick={checkId} disabled={id && "true"}>
         {loading ? (
           <LoadingButton loading variant="outlined">

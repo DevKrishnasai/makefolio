@@ -13,7 +13,7 @@ function Projects({ data }) {
         <div className="Container">
           <ScrollAnimation animateIn="fadeIn">
             <div className="SectionTitle">
-              Projects
+              Projects and Certificates
               <hr style={style} />
             </div>
           </ScrollAnimation>

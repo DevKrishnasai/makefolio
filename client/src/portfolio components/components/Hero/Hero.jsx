@@ -27,7 +27,7 @@ function Hero({ data }) {
   return (
     <main>
       <Dropdown data={data} isOpen={isOpen} toggle={toggle} />
-      <Header toggle={toggle} logo={data["logoName"]} />
+      <Header toggle={toggle} logo={data["logoName"]} data={data} />
       {/* <HeroContainer> */}
       <HeroWrapper>
         <HeroLeft>
@@ -54,10 +54,10 @@ function Hero({ data }) {
                 sequence={[
                   ...sequence,
                   () => setShowScrollDown(true),
-                  "my projects are really cool, go check them out!",
-                  1000,
-                  "See ya! :)",
-                  2000,
+                  // "my projects are really cool, go check them out!",
+                  // 1000,
+                  // "See ya! :)",
+                  // 2000,
                 ]}
                 speed={10}
                 deletionSpeed={65}

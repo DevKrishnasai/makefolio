@@ -74,7 +74,7 @@ function Dropdown({ isOpen, toggle, data }) {
       <NavBtn onClick={toggle}>
         <a
           className="btn PrimaryBtn"
-          href={data["links"]["linkedin"]}
+          href={data["resume_url"]}
           target="_blank"
           rel="noopener noreferrer"
         >

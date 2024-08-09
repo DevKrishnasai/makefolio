@@ -15,7 +15,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebase files/firebase";
 import React, { useState } from "react";
 
-const ProjectSection = ({
+const CertificateSection = ({
   addLines,
   deleteLines,
   setProject,
@@ -70,10 +70,7 @@ const ProjectSection = ({
               setError("");
             }}
             error={error === "title" && true}
-            helperText={
-              error === "title" &&
-              "Please enter a project title or certificate title"
-            }
+            helperText={error === "title" && "Please enter a project title"}
           />
 
           <Textarea
@@ -87,13 +84,13 @@ const ProjectSection = ({
             error={error === "description" && true}
             helperText={
               error === "description" &&
-              "Please enter description for the project or certificate "
+              "Please enter description for the project"
             }
             variant="outlined"
           />
 
           <TextField
-            placeholder="project github link (if available) else place #"
+            placeholder="project github link"
             sx={textFieldSX}
             onChange={(e) => {
               setProject({ ...project, github_repo_link: e.target.value });
@@ -102,11 +99,11 @@ const ProjectSection = ({
             error={error === "github_repo_link" && true}
             helperText={
               error === "github_repo_link" &&
-              "Please paste github repository link of the project else place #"
+              "Please paste github repository link of the project"
             }
           />
           <TextField
-            placeholder="project live link (if available) else place #"
+            placeholder="project live link"
             sx={textFieldSX}
             onChange={(e) => {
               setProject({ ...project, github_live_link: e.target.value });
@@ -132,7 +129,7 @@ const ProjectSection = ({
             error={error === "tech_stack" && true}
             helperText={
               error === "tech_stack" &&
-              "Please enter atleast one technology name and press Enter Key (if its a certificate please enter the name of the certificate)"
+              "Please enter atleast one technology name and press Enter Key"
             }
           />
           <ul>
@@ -235,4 +232,4 @@ const ProjectSection = ({
   );
 };
 
-export default ProjectSection;
+export default CertificateSection;
