@@ -27,7 +27,7 @@ function About({ data }) {
               <div dangerouslySetInnerHTML={{ __html: data["about"] }} />
             </ScrollAnimation>
             <br />
-            <ScrollAnimation animateIn="bounceInRight" animateOnce>
+            <ScrollAnimation animateIn="bounceInLeft" animateOnce>
               <h4
                 style={{
                   fontWeight: "700",
@@ -48,13 +48,13 @@ function About({ data }) {
               ))}
             </Technologies>
             <br />
-            <ScrollAnimation animateIn="bounceInRight" animateOnce>
+            <ScrollAnimation animateIn="bounceInLeft" animateOnce>
               <h4 style={{ fontWeight: "700" }}>Tools I'm Familiar With ➜</h4>
             </ScrollAnimation>
             <br />
             <Technologies>
               {data["tools"].map((tool, index) => (
-                <ScrollAnimation animateIn="bounceInRight" key={tool.key}>
+                <ScrollAnimation animateIn="bounceInLeft" key={tool.key}>
                   <Tech key={index} className="tech">
                     {/* <TechImg src={stack.img} alt={stack.name} /> */}
                     <TechCard>{tool.value}</TechCard>
