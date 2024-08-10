@@ -281,7 +281,9 @@ const Homepage = ({ user, setUser }) => {
       }}
     >
       {page === "home" && (
-        <div>
+        <div style={{
+          textAlign:"center"
+        }}>
           <h1>Hi {user["email"].split("@")[0]}, Welcome to your portfolio</h1>
           <p>
             You can start by filling in the details below. Click on the settings
