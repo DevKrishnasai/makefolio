@@ -23,10 +23,13 @@ export const HeroLeft = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
   padding-right: 2rem;
+  width: 100%;
 
   h1,
   h2 {
+    text-align: left;
     font-size: 2.3rem;
     color: #f6f6f6;
     font-weight: 500;
@@ -34,6 +37,7 @@ export const HeroLeft = styled.div`
   }
 
   h5 {
+    text-align: left;
     font-size: 1.3rem;
     color: #fff;
     margin-top: 1rem;
@@ -44,13 +48,16 @@ export const HeroLeft = styled.div`
     text-align: center;
     align-items: center;
     padding-right: 0;
+    min-height: 190px;
 
     h1,
     h2 {
+      text-align: center;
       font-size: 1.8rem;
     }
 
     h5 {
+      text-align: center;
       font-size: 1.1rem;
     }
   }

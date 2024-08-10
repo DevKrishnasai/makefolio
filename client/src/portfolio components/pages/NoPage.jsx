@@ -9,7 +9,10 @@ const NoPage = () => {
           alt="404"
         />
         <span>404 PAGE</span>
-        <p class="p-a">. The page you were looking for could not be found</p>
+        <p class="p-a">
+          Maybe the portfolio id you are looking for does not exist or the user
+          has not created a portfolio yet
+        </p>
         {/* <p class="p-b">... Back to previous page</p> */}
         {/* <a href="#" class="back">
           ... Back to previous page

@@ -4,7 +4,6 @@ import {
   Snackbar,
   SpeedDial,
   SpeedDialAction,
-  SpeedDialIcon,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import RemainingDetailsPage from "./RemainingDetailsPage";
@@ -282,6 +281,15 @@ const Homepage = ({ user, setUser }) => {
       }}
     >
       {page === "home" && (
+        <div>
+          <h1>Hi {user["email"].split("@")[0]}, Welcome to your portfolio</h1>
+          <p>
+            You can start by filling in the details below. Click on the settings
+            icon to update your account details or logout
+          </p>
+        </div>
+      )}
+      {page === "home" && (
         <HomePart1
           data={data}
           setData={setData}
@@ -302,7 +310,6 @@ const Homepage = ({ user, setUser }) => {
           loading={loading}
         />
       )}
-
       {page === "middle" && (
         <RemainingDetailsPage
           setProject={setProject}
@@ -321,7 +328,6 @@ const Homepage = ({ user, setUser }) => {
           setHide={setHide}
         />
       )}
-
       <Snackbar
         open={add}
         autoHideDuration={1000}
@@ -361,7 +367,6 @@ const Homepage = ({ user, setUser }) => {
           Deleted
         </Alert>
       </Snackbar>
-
       <Account
         handleClickOpen={handleClickOpen}
         handleClickClose={handleClickClose}
