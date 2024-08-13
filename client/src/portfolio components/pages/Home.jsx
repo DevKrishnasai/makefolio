@@ -20,10 +20,8 @@ function Home() {
           `${process.env.REACT_APP_API_BACKEND_URL}/portfolios/portfolio/${id}`
         );
         const data = await response.json();
-        console.log(data);
         if (data["status"] === 200) {
           setUserData(data["user"]);
-          console.log("broooo", data["user"]);
         } else {
           setUserData(null);
         }

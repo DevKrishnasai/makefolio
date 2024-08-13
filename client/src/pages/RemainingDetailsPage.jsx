@@ -73,7 +73,6 @@ const RemainingDetailsPage = ({
     }
 
     try {
-      console.log("-----_>", data);
       const response = await fetch(
         `${process.env.REACT_APP_API_BACKEND_URL}/portfolios/portfoliodata`,
         {

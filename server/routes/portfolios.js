@@ -109,8 +109,6 @@ router.put("/portfoliodata", async (req, res) => {
       resume_url,
     } = req.body;
 
-    console.log(req.body);
-
     // const updatedPortfolio = await Portfolio.findOneAndUpdate(
     //   { portfolioId: portfolioId },
     //   { $set: updateFields },
@@ -178,14 +176,12 @@ router.put("/portfoliodata", async (req, res) => {
 router.get("/portfolio/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
     const user = await Portfolio.findOne({ portfolioId: id });
     if (!user) {
       return res
         .status(404)
         .send({ message: "Portfolio not found.", status: 404 });
     }
-    console.log("%%%%%%%", user);
     res.status(200).send({ message: "found portfolio", user, status: 200 });
   } catch (error) {
     console.error("Error during fetching:", error.message);

@@ -190,7 +190,6 @@ const Homepage = ({ user, setUser }) => {
   useEffect(() => {
     const getUserByData = async () => {
       // setLoading(true);
-      console.log(user["portfolioId"], "in homepage");
       try {
         const response = await fetch(
           `${process.env.REACT_APP_API_BACKEND_URL}/portfolios/updateData/${user["portfolioId"]}`
@@ -253,7 +252,6 @@ const Homepage = ({ user, setUser }) => {
           return res.json();
         })
         .then((d) => {
-          console.log(d);
           if (d.status === 200) {
             setError(false);
             handleClickClose();
@@ -280,17 +278,19 @@ const Homepage = ({ user, setUser }) => {
         minHeight: "100vh",
       }}
     >
-      {page === "home" && (
-        <div style={{
-          textAlign:"center"
-        }}>
-          <h1>Hi {user["email"].split("@")[0]}, Welcome to your portfolio</h1>
-          <p>
+      {/* {page === "home" && (
+        <div
+          style={{
+            textAlign: "center",
+          }}
+        >
+          <h2>Hi {user["email"].split("@")[0]}, Welcome to your portfolio</h2>
+          <span>
             You can start by filling in the details below. Click on the settings
             icon to update your account details or logout
-          </p>
+          </span>
         </div>
-      )}
+      )} */}
       {page === "home" && (
         <HomePart1
           data={data}

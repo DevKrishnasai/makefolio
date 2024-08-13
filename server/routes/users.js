@@ -1,4 +1,5 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 const router = express.Router();
 
 const User = require("../models/user");
@@ -7,11 +8,18 @@ const Portfolio = require("../models/portfolio");
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
+    if (!email || !password) {
+      return res
+        .status(400)
+        .send({ message: "fields are required", status: 400 });
+    }
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).send({ message: "User not found.", status: 400 });
     }
-    if (user.password !== password) {
+    const isMatched = await bcrypt.compare(password, user.password);
+
+    if (!isMatched) {
       return res
         .status(401)
         .send({ message: "Invalid credentials.", status: 401 });
@@ -30,16 +38,24 @@ router.post("/login", async (req, res) => {
 router.post("/register", async (req, res) => {
   try {
     const { email, password, name } = req.body;
+    if (!email || !password || !name) {
+      return res
+        .status(400)
+        .send({ message: "Please provide all fields.", status: 400 });
+    }
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res
         .status(400)
         .send({ message: "Email already exists.", status: 400 });
     }
+    const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS));
+    const hashedPassword = await bcrypt.hash(password, salt);
+
     const newUser = new User({
       name,
       email,
-      password,
+      password: hashedPassword,
       portfolioId: name + Math.floor(Math.random() * 1000),
     });
     await newUser.save();
@@ -55,7 +71,6 @@ router.post("/register", async (req, res) => {
 router.put("/updateUser", async (req, res) => {
   try {
     const { updatedPortfolioId, email, password, portfolioId } = req.body;
-    console.log("updateUser", req.body);
 
     const user = await User.findOne({ portfolioId });
     let portfolio = await Portfolio.findOne({ portfolioId });
@@ -88,7 +103,13 @@ router.put("/updateUser", async (req, res) => {
     }
 
     user.email = email;
-    user.password = password;
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS));
+      const hashedPassword = await bcrypt.hash(password, salt);
+
+      user.password = hashedPassword;
+    }
     if (updatedPortfolioId) {
       user.portfolioId = updatedPortfolioId;
       portfolio.portfolioId = updatedPortfolioId;
@@ -112,7 +133,6 @@ router.get("/getUsers/:id", async (req, res) => {
     const { id } = req.params;
     if (id === process.env.ADMIN_PASS) {
       const users = await User.find({});
-      console.log("Users fetched successfully:", users);
       res
         .status(200)
         .send({ message: "Users fetched successfully.", status: 200, users });

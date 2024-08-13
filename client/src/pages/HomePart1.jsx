@@ -130,7 +130,7 @@ const HomePart1 = ({
         >
           <TextField
             type="text"
-            label="logo (ex: Krishna)"
+            label="logo (e.g. Krishna)"
             sx={{
               ...textBoxSX,
 

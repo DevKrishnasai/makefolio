@@ -9,7 +9,6 @@ import {
 } from "./HeaderElements";
 
 const Header = ({ toggle, logo, data }) => {
-  console.log(data);
   return (
     <div className="Container" style={{ padding: 0 }}>
       <Nav style={{ zIndex: "88" }}>

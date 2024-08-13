@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Dropdown from "../Dropdown/Dropdown";
 import Header from "../Header/Header";
 import {
@@ -12,60 +12,68 @@ import {
 import { TypeAnimation } from "react-type-animation";
 import ScrollAnimation from "react-animate-on-scroll";
 
-function Hero({ data }) {
+const Hero = React.memo(({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showSubtitle, setShowSubtitle] = useState(false);
-  const [showSubtitle1, setShowSubtitle1] = useState(false);
-  const [showScrollDown, setShowScrollDown] = useState(false);
+  const [animationState, setAnimationState] = useState({
+    showSubtitle: false,
+    showSubtitle1: false,
+    showScrollDown: false,
+  });
 
-  const toggle = () => {
-    setIsOpen(!isOpen);
+  const toggle = () => setIsOpen(!isOpen);
+
+  const sequence = useMemo(
+    () => data["tags"].map((tag) => tag["value"]),
+    [data]
+  );
+
+  const updateAnimationState = (key) => {
+    setAnimationState((prev) => ({ ...prev, [key]: true }));
   };
-
-  const sequence = data["tags"].map((tag) => tag["value"]);
 
   return (
     <main>
       <Dropdown data={data} isOpen={isOpen} toggle={toggle} />
       <Header toggle={toggle} logo={data["logoName"]} data={data} />
-      {/* <HeroContainer> */}
       <HeroWrapper>
         <HeroLeft>
           <ScrollAnimation animateIn="fadeIn">
             <TypeAnimation
               cursor={false}
-              sequence={["Hi, I'm ", () => setShowSubtitle1(true)]}
+              sequence={[
+                "Hi, I'm ",
+                () => updateAnimationState("showSubtitle1"),
+              ]}
               speed={{ type: "keyStrokeDelayInMs" }}
               wrapper="h1"
               repeat={0}
             />
-            {showSubtitle1 && (
+            {animationState.showSubtitle1 && (
               <TypeAnimation
                 cursor={false}
-                sequence={[data["fullName"], () => setShowSubtitle(true)]}
+                sequence={[
+                  data["fullName"],
+                  () => updateAnimationState("showSubtitle"),
+                ]}
                 speed={{ type: "keyStrokeDelayInMs", value: 150 }}
                 wrapper="h2"
                 repeat={0}
               />
             )}
-            {showSubtitle && (
+            {animationState.showSubtitle && (
               <TypeAnimation
                 cursor={true}
                 sequence={[
                   ...sequence,
-                  () => setShowScrollDown(true),
-                  // "my projects are really cool, go check them out!",
-                  // 1000,
-                  // "See ya! :)",
-                  // 2000,
+                  () => updateAnimationState("showScrollDown"),
                 ]}
                 speed={10}
                 deletionSpeed={65}
                 wrapper="h5"
-                repeat={Infinity}
+                repeat={3}
               />
             )}
-            {showScrollDown && (
+            {animationState.showScrollDown && (
               <ScrollAnimation animateIn="flipInX" offset={0}>
                 <ScrollDown to="projects" id="scrollDown">
                   <ScrollLink>
@@ -94,13 +102,12 @@ function Hero({ data }) {
 
         <HeroRight>
           <ScrollAnimation animateIn="bounceIn">
-            <Image src={data["hero_url"]} alt="man-svgrepo" />
+            <Image src={data["hero_url"]} alt="man-svgrepo" loading="lazy" />
           </ScrollAnimation>
         </HeroRight>
       </HeroWrapper>
-      {/* </HeroContainer> */}
     </main>
   );
-}
+});
 
 export default Hero;
