@@ -22,11 +22,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-cron.schedule("*/1 * * * *", async () => {
+cron.schedule("*/20 * * * *", async () => {
   try {
-    // const response = await axios.get(
-    //   `http://localhost:${process.env.PORT || 5000}`
-    // );
     const response = await axios.get(process.env.URL);
     console.log("Server pinged successfully:", response.data);
   } catch (error) {
